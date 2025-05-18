@@ -7,10 +7,10 @@ commit_message_file=$1
 commit_message=$(cat "$commit_message_file")
 
 # 허용된 커밋 타입 목록
-allowed_types="feat|fix|docs|refactor|style|design|chore|ci|perf"
+allowed_types="feat|fix|docs|refactor|style|design|chore|ci|perf|revert"
 
 # 커밋 메시지 패턴
-pattern="^(${allowed_types}): \[#([0-9]+)\] .+"
+pattern="^(${allowed_types}) *: *\[#([0-9]+)\] .+"
 
 # 커밋 메시지 검증
 if ! echo "$commit_message" | grep -Eiq "$pattern"; then
