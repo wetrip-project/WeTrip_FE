@@ -6,7 +6,11 @@
     "es6": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["import", "@typescript-eslint", "react"],
+  "plugins": [
+    "import",
+    "@typescript-eslint",
+    "react"
+  ],
   "extends": [
     "airbnb",
     "airbnb-typescript",
@@ -14,9 +18,12 @@
     "plugin:react/recommended",
     "next/core-web-vitals",
     "next/typescript",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": [
+    "node_modules/"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -24,8 +31,21 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
     "jsx-a11y/label-has-associated-control": "off",
-    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }]
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ]
   }
 }
