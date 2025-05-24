@@ -1,26 +1,136 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tailwindcss/theme.css'
+  layer(
+    theme
+  );
+@import 'tailwindcss/preflight.css'
+  layer(
+    base
+  );
+@import 'tailwindcss/utilities.css'
+  layer(
+    utilities
+  );
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #13df6f;
+  --color-primary-hover: #dcffec;
+  --color-disabled-bg: #d8dad9;
+  --color-error: #e53060;
+
+  --font-10b: 700
+    10px/140%
+    Pretendard;
+  --font-10r: 400
+    10px/140%
+    Pretendard;
+  --font-12b: 700
+    12px/140%
+    Pretendard;
+  --font-12r: 400
+    12px/140%
+    Pretendard;
+  --font-14b: 700
+    14px/140%
+    Pretendard;
+  --font-14r: 400
+    14px/140%
+    Pretendard;
+  --font-16b: 700
+    16px/140%
+    Pretendard;
+  --font-16r: 400
+    16px/140%
+    Pretendard;
+  --font-20b: 700
+    20px/140%
+    Pretendard;
+  --font-20r: 400
+    20px/140%
+    Pretendard;
+  --font-24b: 700
+    24px/140%
+    Pretendard;
+  --font-24r: 400
+    24px/140%
+    Pretendard;
+  --font-26b: 700
+    26px/140%
+    Pretendard;
+  --font-26r: 400
+    26px/140%
+    Pretendard;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .font-10b {
+    font: var(
+      --font-10b
+    );
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .font-10r {
+    font: var(
+      --font-10r
+    );
+  }
+  .font-12b {
+    font: var(
+      --font-12b
+    );
+  }
+  .font-12r {
+    font: var(
+      --font-12r
+    );
+  }
+  .font-14b {
+    font: var(
+      --font-14b
+    );
+  }
+  .font-14r {
+    font: var(
+      --font-14r
+    );
+  }
+  .font-16b {
+    font: var(
+      --font-16b
+    );
+  }
+  .font-16r {
+    font: var(
+      --font-16r
+    );
+  }
+  .font-20b {
+    font: var(
+      --font-20b
+    );
+  }
+  .font-20r {
+    font: var(
+      --font-20r
+    );
+  }
+  .font-24b {
+    font: var(
+      --font-24b
+    );
+  }
+  .font-24r {
+    font: var(
+      --font-24r
+    );
+  }
+  .font-26b {
+    font: var(
+      --font-26b
+    );
+  }
+  .font-26r {
+    font: var(
+      --font-26r
+    );
+  }
 }
