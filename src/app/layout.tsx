@@ -1,6 +1,7 @@
 import './globals.css'
 import localFont from 'next/font/local'
 import type { Metadata } from 'next'
+import { cx } from 'class-variance-authority'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className={pretendardFont.className}>
+    <html lang='en' className={cx(pretendardFont.className, 'mx-auto min-h-screen w-[360px]')}>
       <body>{children}</body>
     </html>
   )
