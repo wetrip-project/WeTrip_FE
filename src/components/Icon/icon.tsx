@@ -1,4 +1,4 @@
-import * as Icons from '@/assets/icons'
+import * as Icons from '@/components/Icon/index'
 import { twMerge } from 'tailwind-merge'
 
 type IconName = keyof typeof Icons
