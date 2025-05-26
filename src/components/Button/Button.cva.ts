@@ -1,5 +1,6 @@
-import { cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>
 export const buttonVariants = cva(
   'h-[50px] w-[200px] inline-flex items-center justify-center rounded-md font-16r',
   {
