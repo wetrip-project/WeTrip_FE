@@ -1,10 +1,9 @@
-import { ButtonVariantProps, buttonVariants } from '@/components/Button/button.cva'
+import {
+  ButtonVariantProps,
+  RequiredVariants,
+  buttonVariants,
+} from '@/components/Button/button.cva'
 import { cn } from '@/utils/cn'
-
-type RequiredVariants = {
-  variant: NonNullable<ButtonVariantProps['variant']>
-  size: NonNullable<ButtonVariantProps['size']>
-}
 
 export interface ButtonProps
   extends Omit<ButtonVariantProps, 'variant' | 'size'>,
