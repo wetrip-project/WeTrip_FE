@@ -1,6 +1,10 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
 export type ButtonVariantProps = VariantProps<typeof buttonVariants>
+export type RequiredVariants = {
+  variant: NonNullable<ButtonVariantProps['variant']>
+  size: NonNullable<ButtonVariantProps['size']>
+}
 
 export const buttonVariants = cva(
   'h-[50px] w-[200px] py-[14px] inline-flex items-center justify-center rounded-md font-16r',
