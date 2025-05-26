@@ -7,7 +7,7 @@ commit_message_file=$1
 commit_message=$(cat "$commit_message_file")
 
 # 허용된 커밋 타입 목록
-allowed_types="feat|fix|docs|refactor|style|design|chore|ci|perf|revert|remove"
+allowed_types="feat|fix|docs|refactor|style|design|chore|ci|perf|revert|remove|add"
 
 # 커밋 메시지 패턴
 pattern="^(${allowed_types}) *: *\[#([0-9]+)\] .+"
