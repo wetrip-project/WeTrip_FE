@@ -5,8 +5,8 @@ export const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-white border-stroke2 text-t3',
-        complete: 'bg-disabled text-t3',
+        default: 'bg-white border border-stroke2 text-t1 placeholder:text-t3',
+        sub: 'bg-b1 border border-stroke2 text-t1 placeholder:text-t3',
       },
     },
     defaultVariants: {

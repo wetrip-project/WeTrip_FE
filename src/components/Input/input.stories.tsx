@@ -29,7 +29,7 @@ export const Variants: Story = {
   render: (args) => (
     <div className='flex flex-col gap-4'>
       <Input {...args} variant='default' placeholder='기본 입력 필드' />
-      <Input {...args} variant='complete' placeholder='완료된 입력 필드' />
+      <Input {...args} variant='sub' placeholder='서브 입력 필드' />
     </div>
   ),
 }
