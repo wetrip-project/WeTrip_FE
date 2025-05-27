@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className={cx(pretendardFont.className, 'mx-auto min-h-screen w-[360px]')}>
+    <html lang='en' className={cx(pretendardFont.className, 'mx-auto min-h-screen w-[360px] px-5')}>
       <body>{children}</body>
     </html>
   )
