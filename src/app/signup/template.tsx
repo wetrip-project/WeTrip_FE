@@ -1,3 +1,4 @@
+'use client'
 import { ProgressBar } from '@/components/ProgressBar'
 import { usePathname } from 'next/navigation'
 
@@ -10,7 +11,6 @@ export default function SignupTemplate({ children }: { children: React.ReactNode
   }
   const pathname = usePathname()
   const currentStep = Object.entries(stepMap).find(([key]) => pathname.includes(key))?.[1] ?? 0
-
   return (
     <div>
       <div className='h-[6px] w-[320px]'>
