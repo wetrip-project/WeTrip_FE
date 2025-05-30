@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={cn(pretendardFont.className, 'mx-auto min-h-screen w-[360px] px-5')}>
+      <body className={cn(pretendardFont.className, 'mx-auto h-[100vh] w-[360px]')}>
         {children}
       </body>
     </html>
