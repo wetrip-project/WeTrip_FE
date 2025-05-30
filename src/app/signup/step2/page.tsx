@@ -18,7 +18,7 @@ const page = () => {
     { label: '80대', value: '80' },
   ]
   return (
-    <div className='flex min-h-[calc(100vh-76px)] w-[320px] flex-col gap-4'>
+    <div className='relative flex h-[calc(100vh-76px)] w-[320px] flex-col gap-4'>
       <div className='font-20b'>성별과 나이대를 선택해주세요</div>
       <div className='flex flex-col gap-2'>
         <div className='font-14b'>성별</div>
@@ -42,7 +42,7 @@ const page = () => {
           }}
         />
       </div>
-      <div className='h-[90px] w-[320px] py-[14px]'>
+      <div className='absolute bottom-0 h-[90px] w-[320px] py-[14px]'>
         <Button
           children={'다음'}
           variant={'deactivation'}
