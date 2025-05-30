@@ -21,3 +21,4 @@ export { default as HeartOutline } from 'public/assets/icons/heart_outline.svg?r
 export { default as Back } from 'public/assets/icons/24_Back.svg'
 export { default as Share } from 'public/assets/icons/24_Share.svg'
 export { default as HamburgerBig } from 'public/assets/icons/24_hamburger.svg'
+export { default as UploadImg } from 'public/assets/icons/uploadImg.svg'

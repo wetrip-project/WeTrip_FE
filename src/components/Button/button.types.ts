@@ -10,4 +10,5 @@ export interface ButtonProps extends ButtonVariantProps {
   children: React.ReactNode
   type?: 'button' | 'submit' | 'reset'
   className?: string
+  onClick?: () => void
 }
