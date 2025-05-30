@@ -31,7 +31,7 @@ export const GenderSelect: Story = {
 
 export const AgeGroupSelect: Story = {
   render: () => {
-    const [value, setValue] = useState<string | null>('20') // 선택된 초기값 설정
+    const [value, setValue] = useState<string | null>('20')
     const ageOptions = [
       { label: '10대', value: '10' },
       { label: '20대', value: '20' },
