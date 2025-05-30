@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import type { StaticImageData } from 'next/image'
+
+type PreviewType = string | StaticImageData
 
 export function useImageUpload() {
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<PreviewType | null>(null)
   const [file, setFile] = useState<File | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,20 +20,16 @@ export function useImageUpload() {
 
   const uploadImage = async () => {
     if (!file) return null
-    const formData = new FormData()
-    formData.append('image', file)
-    const res = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
-    })
-    const result = await res.json()
-    return result.filePath
+    // const formData = new FormData()
+    // formData.append('image', file)
+    // const res = await fetch('/api/upload', {
+    //   method: 'POST',
+    //   body: formData,
+    // })
+    // const result = await res.json()
+    // return result.filePath
+    console.log('uploadImage')
   }
 
-  return {
-    preview,
-    file,
-    handleChange,
-    uploadImage,
-  }
+  return { preview, handleChange, uploadImage }
 }
