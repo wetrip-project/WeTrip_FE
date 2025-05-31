@@ -1,6 +1,7 @@
+import { ReactNode } from 'react'
 import { Button } from '../Button'
 
-type Option = { label: string; value: string }
+type Option = { label: ReactNode; value: string }
 
 interface Props {
   options: Option[]
