@@ -1,7 +1,7 @@
 import * as Icons from '@/components/Icon/index'
 import { twMerge } from 'tailwind-merge'
 
-type IconName = keyof typeof Icons
+export type IconName = keyof typeof Icons
 interface IconProps {
   className?: string
   iconName: IconName
