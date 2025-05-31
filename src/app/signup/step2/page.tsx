@@ -1,22 +1,10 @@
 'use client'
 import { Button } from '@/components/Button'
 import SingleSelectGroup from '@/components/SelectionGroup/SingleSelectGroup'
+import ageOptions from '@/constants/options/ageOptions'
+import genderOptions from '@/constants/options/genderOptions'
 
 const page = () => {
-  const genderOptions = [
-    { label: '남성', value: 'male' },
-    { label: '여성', value: 'female' },
-  ]
-  const ageOptions = [
-    { label: '10대', value: '10' },
-    { label: '20대', value: '20' },
-    { label: '30대', value: '30' },
-    { label: '40대', value: '40' },
-    { label: '50대', value: '50' },
-    { label: '60대', value: '60' },
-    { label: '70대', value: '70' },
-    { label: '80대', value: '80' },
-  ]
   return (
     <div className='relative flex h-[calc(100vh-62px)] w-[320px] flex-col gap-4 pt-[25px]'>
       <div className='font-20b'>성별과 나이대를 선택해주세요</div>
