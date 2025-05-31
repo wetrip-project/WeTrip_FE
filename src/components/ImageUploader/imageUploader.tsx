@@ -26,7 +26,9 @@ export default function ImageUploader() {
           <UploadImg />
           <input
             type='file'
-            accept='image/*'
+            id='avator'
+            accept='image/png, image/jpeg'
+            multiple={false}
             onChange={handleChange}
             className='absolute top-0 left-0 h-full w-full opacity-0'
           />
