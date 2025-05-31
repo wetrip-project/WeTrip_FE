@@ -3,7 +3,7 @@ import ImageUploader from '@/components/ImageUploader/imageUploader'
 
 const page = () => {
   return (
-    <div className='flex h-[calc(100vh-76px)] w-[320px] flex-col justify-between'>
+    <div className='flex h-[calc(100svh-62px)] w-[320px] flex-col justify-between'>
       <div className='flex h-[305px] w-[320px] flex-col gap-4'>
         <div className='font-20b'>
           프로필 사진을 등록하면
