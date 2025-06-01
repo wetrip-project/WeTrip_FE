@@ -1,5 +1,6 @@
 import React from 'react';
 import CompanionPostList from './components/CompanionPostList';
+import FilterTagBar from './components/FilterTagBar';
 
 type Post = {
   id: number;
@@ -49,7 +50,7 @@ const CompanionPostsPage = () => {
   return (
     <div style={{ padding: '20px' }}>
       <div>검색창</div>
-            <div>정렬탭</div>
+      <FilterTagBar />
       <CompanionPostList posts={dummyPosts} />
     </div>
   );
