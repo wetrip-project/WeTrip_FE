@@ -2,6 +2,7 @@ import './globals.css'
 import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 import { cn } from '@/utils/cn'
+import BottomNav from '@/components/BottomNav/BottomNav'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,6 +25,7 @@ export default function RootLayout({
         className={cn(pretendardFont.className, 'mx-auto h-[100dvh] w-[360px] border-r border-l')}
       >
         {children}
+        <BottomNav />
       </body>
     </html>
   )
