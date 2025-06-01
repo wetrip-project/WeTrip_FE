@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import SortModal from './modals/SortModal';
-import TravelDateModal from './modals/TravelDateModal';
 import PreferenceTagModal from './modals/PreferenceTagModal';
 import Icon from '@/app/components/Icon'; // Adjust the import path as necessary
 
@@ -82,9 +81,9 @@ const FilterTagBar: React.FC = () => {
         <SortModal onClose={closeModal} />
       )}
 
-      {activeModal === 'travelDate' && (
+      {/* {activeModal === 'travelDate' && (
         <TravelDateModal onClose={closeModal} />
-      )}
+      )} */}
 
       {activeModal === 'preferenceTag' && (
         <PreferenceTagModal onClose={closeModal} />
