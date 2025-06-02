@@ -1,6 +1,6 @@
-import { buttonVariants } from '@/components/Button/button.cva'
 import { cn } from '@/utils/cn'
 import { ButtonProps } from './button.types'
+import { buttonVariants } from './Button.cva'
 
 export const Button = ({ children, className, type = 'button', onClick, ...rest }: ButtonProps) => {
   return (
