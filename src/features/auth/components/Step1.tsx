@@ -1,11 +1,13 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { useSignupStore } from '@/stores/hooks/signupStore'
 
-const Step1 = () => {
-  const { setStep } = useSignupStore()
+type Props = {
+  onNext: () => void
+}
+
+const Step1 = ({ onNext }: Props) => {
   return (
-    <div className='flex flex-col justify-between'>
+    <div className='flex h-[calc(100vh-62px)] w-[320px] flex-col justify-between'>
       <div className='flex flex-1 flex-col gap-4'>
         <div className='font-20b'>사용할 닉네임을 적어주세요</div>
         <Input variant='default' placeholder='한글,숫자 최대 10자' />
@@ -16,7 +18,7 @@ const Step1 = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
-          onClick={() => setStep(2)}
+          onClick={onNext}
         />
       </div>
     </div>

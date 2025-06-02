@@ -5,7 +5,11 @@ import ageOptions from '@/constants/options/ageOptions'
 import genderOptions from '@/constants/options/genderOptions'
 import { useSignupStore } from '@/stores/hooks/signupStore'
 
-const Step2 = () => {
+type Props = {
+  onNext: () => void
+}
+
+const Step2 = ({ onNext }: Props) => {
   const { setStep } = useSignupStore()
   return (
     <div className='relative flex h-[calc(100vh-62px)] w-[320px] flex-col gap-4'>
@@ -38,7 +42,7 @@ const Step2 = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
-          onClick={() => setStep(3)}
+          onClick={onNext}
         />
       </div>
     </div>

@@ -4,7 +4,11 @@ import MultiSelectGroup from '@/components/MultiSelectionGroup/MultiSelectGroup'
 import interestOptions from '@/constants/options/inerestOptions'
 import { useSignupStore } from '@/stores/hooks/signupStore'
 
-const TripFavorSetting = () => {
+type Props = {
+  onNext: () => void
+}
+
+const TripFavorSetting = ({ onNext }: Props) => {
   const { setStep } = useSignupStore()
 
   return (
@@ -30,7 +34,7 @@ const TripFavorSetting = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
-          onClick={() => setStep(4)}
+          onClick={onNext}
         />
       </div>
     </div>
