@@ -1,7 +1,11 @@
 import { Button } from '@/components/Button'
 import ImageUploader from '@/components/ImageUploader/imageUploader'
+import { useEffect } from 'react'
 
 const Step4 = () => {
+  useEffect(() => {
+    console.log('Step4 렌더링')
+  }, [])
   return (
     <div className='flex h-[calc(100svh-62px)] w-[320px] flex-col justify-between'>
       <div className='flex h-[305px] w-[320px] flex-col gap-4'>
