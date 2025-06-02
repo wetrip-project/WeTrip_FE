@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button'
 import ImageUploader from '@/components/ImageUploader/imageUploader'
 
-const AvatorSetting = () => {
+const Step4 = () => {
   return (
     <div className='flex h-[calc(100svh-62px)] w-[320px] flex-col justify-between'>
       <div className='flex h-[305px] w-[320px] flex-col gap-4'>
@@ -32,4 +32,4 @@ const AvatorSetting = () => {
   )
 }
 
-export default AvatorSetting
+export default Step4

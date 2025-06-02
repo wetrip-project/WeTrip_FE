@@ -4,7 +4,7 @@ import SingleSelectGroup from '@/components/SelectionGroup/SingleSelectGroup'
 import ageOptions from '@/constants/options/ageOptions'
 import genderOptions from '@/constants/options/genderOptions'
 
-const AgeGenderSetting = () => {
+const Step2 = () => {
   return (
     <div className='relative flex h-[calc(100vh-62px)] w-[320px] flex-col gap-4'>
       <div className='font-20b'>성별과 나이대를 선택해주세요</div>
@@ -42,4 +42,4 @@ const AgeGenderSetting = () => {
   )
 }
 
-export default AgeGenderSetting
+export default Step2

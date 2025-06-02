@@ -1,8 +1,9 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import React from 'react'
+import { useSignupStore } from '@/stores/hooks/signupStore'
 
-const NickNameSetting = () => {
+const Step1 = () => {
+  const { setStep } = useSignupStore()
   return (
     <div className='flex flex-col justify-between'>
       <div className='flex flex-1 flex-col gap-4'>
@@ -15,10 +16,11 @@ const NickNameSetting = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
+          onClick={() => setStep(2)}
         />
       </div>
     </div>
   )
 }
 
-export default NickNameSetting
+export default Step1
