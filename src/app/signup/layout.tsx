@@ -12,7 +12,9 @@ export default function signupLayout({
         <Icon iconName={'Back'} />
       </div>
       <SignupScaffold />
-      <div className='w-[320px]'>{children}</div>
+      <div className='flex min-h-[calc(100vh-62px)] w-[320px] flex-col justify-between pt-[25px]'>
+        {children}
+      </div>
     </div>
   )
 }
