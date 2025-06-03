@@ -15,7 +15,7 @@ type CompanionPostListProps = {
 
 const CompanionPostList = ({ posts }: CompanionPostListProps) => {
   return (
-    <ul className='margin-[26px]'>
+    <ul className='margin-[26px] px-5'>
       {posts.map((post) => (
         <li
           key={post.id}

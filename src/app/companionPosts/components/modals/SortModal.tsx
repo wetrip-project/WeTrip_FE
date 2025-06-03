@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 interface SortModalProps {
   onClose: () => void;
+  onConfirm: (selectedSort: string) => void; 
+  sortType: string;
 }
 
-const SortModal: React.FC<SortModalProps> = ({ onClose }) => {
-  const [selectedOption, setSelectedOption] = useState<string>('');
+const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType}) => {
+  const [selectedOption, setSelectedOption] = useState<string>(sortType || '');
 
   const handleComplete = () => {
-    console.log('정렬 선택:', selectedOption);
+    onConfirm(selectedOption);
     onClose();
   };
 

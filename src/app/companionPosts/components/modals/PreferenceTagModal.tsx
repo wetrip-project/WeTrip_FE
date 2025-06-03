@@ -45,14 +45,19 @@ const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
   const isActive = localAgeTags.length + localGenderTags.length > 0;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50">
+    <div
+  className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50"
+  onMouseDown={(e) => e.stopPropagation()}
+  onTouchStart={(e) => e.stopPropagation()}
+>
       <h3 className="text-lg font-bold mb-4">선호 태그 선택</h3>
 
       {/* 연령대 */}
       <div className="mb-6">
         <p className="font-medium mb-2">연령대</p>
-        <div className="flex flex-wrap gap-2">
-          {['20대', '30대', '40대', '50대', '60대'].map(age => (
+        <div
+        className="whitespace-nowrap py-3 flex gap-2 cursor-grab active:cursor-grabbing"
+        >           {['20대', '30대', '40대', '50대', '60대'].map(age => (
             <button
               key={age}
               onClick={() => toggleAgeTag(age)}
