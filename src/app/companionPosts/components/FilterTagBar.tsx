@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SortModal from './modals/SortModal';
 import TravelDateModal from './modals/TravelDateModal';
 import PreferenceTagModal from './modals/PreferenceTagModal';
 import Icon from '@/components/Icon/icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 
 interface FilterTagBarProps {
@@ -42,7 +43,7 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
 
   // 정렬 타입 state
   const [sortType, setSortType] = useState<string>('최신순');
-
+  const swiperRef = useRef<SwiperType | null>(null);
   
   const handleSortConfirm = (selectedSort: string) => {
     setSortType(selectedSort);
@@ -78,6 +79,7 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
     closeModal();
   };  
 
+  
   const totalTagsCount = selectedAgeTags.length + selectedGenderTags.length;
 
   const preferenceTagLabel =
@@ -94,18 +96,28 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
         ~
         ${endDate.getFullYear()}.${(endDate.getMonth() + 1).toString().padStart(2, '0')}.${endDate.getDate().toString().padStart(2, '0')}`;
 
+        // swiper 업데이트
+        useEffect(() => {
+          if (swiperRef.current) {
+            swiperRef.current.update();
+          }
+        }, [travelDateLabel, preferenceTagLabel]);
+        
   return (
     <div className='py-5'>
       {/* 필터바 */}
       <Swiper
-        slidesPerView={'auto'}
-        spaceBetween={8}
-        freeMode={true} 
-        allowTouchMove={!activeModal}
-        slidesOffsetBefore={16}
-        slidesOffsetAfter={16}
-        className="py-3"
-      >
+  slidesPerView={'auto'}
+  spaceBetween={8}
+  freeMode={true}
+  allowTouchMove={!activeModal}
+  slidesOffsetBefore={16}
+  slidesOffsetAfter={16}
+  className="py-3"
+  onSwiper={(swiper) => {
+    swiperRef.current = swiper;
+  }}
+>
         <SwiperSlide style={{ width: 'auto' }}>
         <button
     onClick={() => openModal('sort')}
