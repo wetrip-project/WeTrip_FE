@@ -56,7 +56,7 @@ const CompanionPostList = ({ posts }: CompanionPostListProps) => {
   }, [page, posts.length]); 
 
   return (
-    <ul className='my-[26px] px-5'>
+    <ul className='mb-[26px] px-5'>
       {visiblePosts.map((post) => (
         <li
           key={post.id}
