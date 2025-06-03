@@ -8,13 +8,16 @@ import { ko } from 'date-fns/locale';
 interface TravelDateModalProps {
   onClose: () => void;
   onConfirm: (fromDate: Date | undefined, toDate: Date | undefined) => void;
+  selectedStartDate: Date | undefined; 
+  selectedEndDate: Date | undefined; 
 }
 
-const TravelDateModal: React.FC<TravelDateModalProps> = ({ onClose, onConfirm }) => {
+const TravelDateModal: React.FC<TravelDateModalProps> = ({ onClose, onConfirm,selectedStartDate,selectedEndDate}) => {
   const [range, setRange] = useState<DateRange>({
-    from: undefined,
-    to: undefined,
+    from: selectedStartDate,
+    to: selectedEndDate,
   });
+  
 
   const handleComplete = () => {
     console.log('선택한 날짜:', range);
@@ -25,7 +28,7 @@ const TravelDateModal: React.FC<TravelDateModalProps> = ({ onClose, onConfirm })
 
   return (
     <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50">
-      <h3 className="text-xl mb-4 text-center">여행일자 선택</h3>
+      <h3 className="text-xl mb-4 text-center font-bold">여행일자 선택</h3>
 
       <DayPicker
         mode="range"
