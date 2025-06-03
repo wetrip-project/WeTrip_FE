@@ -1,43 +1,40 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Icon from '../Icon/icon';
+import type { IconName } from '../Icon/icon';
 
 const BottomNav: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('동행글');
+  const pathname = usePathname();
 
-  const tabs = [
-    { name: '홈', key: '홈' },
-    { name: '동행글', key: '동행글' },
-    { name: '채팅', key: '채팅' },
-    { name: '커뮤니티', key: '커뮤니티' },
-    { name: '마이페이지', key: '마이페이지' },
+  const tabs: { name: string; key: string; icon_default: IconName; icon_active: IconName; path: string }[] = [
+    { name: '홈', key: 'home', icon_default: 'home', icon_active: 'home_active', path: '/' },
+    { name: '동행글', key: 'companion', icon_default: 'companion', icon_active: 'companion_active', path: '/companionPosts' },
+    { name: '채팅', key: 'chat', icon_default: 'chat', icon_active: 'chat_active', path: '/chat' },
+    { name: '커뮤니티', key: 'community', icon_default: 'community', icon_active: 'community_active', path: '/community' },
+    { name: '마이페이지', key: 'mypage', icon_default: 'mypage', icon_active: 'mypage_active', path: '/mypage' },
   ];
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-gray-200 flex justify-around items-center py-2 z-50">
-      {tabs.map((tab) => (
-        <button
-          key={tab.key}
-          onClick={() => setActiveTab(tab.key)}
-          className="flex flex-col items-center justify-center text-xs text-center gap-1"
-        >
-          {/* 아이콘 자리 (img 태그) */}
-          <img
-            src={`text-sm ${
-                activeTab === tab.key ? 'text-[#333333] font-bold' : 'text-gray-400'
-              }`}
-            alt={tab.name}
-            className="w-6 h-6 object-contain"
-          />
+    <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-gray-200 flex justify-around items-center py-2 z-10">
+      {tabs.map((tab) => {
+        const isActive = pathname === tab.path;
 
-          {/* 텍스트 */}
-          <span
-            className={`text-sm`}
-          >
-            {tab.name}
-          </span>
-        </button>
-      ))}
+        return (
+          <Link key={tab.key} href={tab.path} className="flex flex-col items-center justify-center text-xs text-center gap-1">
+            <Icon iconName={isActive ? tab.icon_active : tab.icon_default} className="mx-auto w-[26px] h-6" />
+
+            {/* 텍스트 */}
+            <span
+              className={`text-sm ${isActive ? 'text-[#616161]' : 'text-[#9E9E9E]'}`}
+            >
+              {tab.name}
+            </span>
+          </Link>
+        );
+      })}
     </nav>
   );
 };
