@@ -23,12 +23,11 @@ const BottomNav: React.FC = () => {
         const isActive = pathname === tab.path;
 
         return (
-          <Link key={tab.key} href={tab.path} className="flex flex-col items-center justify-center text-xs text-center gap-1">
+          <Link key={tab.key} href={tab.path} className="flex flex-col items-center justify-center font-12r text-center gap-1">
             <Icon iconName={isActive ? tab.icon_active : tab.icon_default} className="mx-auto w-[26px] h-6" />
 
-            {/* 텍스트 */}
             <span
-              className={`text-sm ${isActive ? 'text-[#616161]' : 'text-[#9E9E9E]'}`}
+              className={`font-14r ${isActive ? 'text-t2' : 'text-t3'}`}
             >
               {tab.name}
             </span>

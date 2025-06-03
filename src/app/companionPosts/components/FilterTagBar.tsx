@@ -12,11 +12,6 @@ import 'swiper/css';
 interface FilterTagBarProps {
   showRecruitingOnly: boolean;
   setShowRecruitingOnly: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface FilterTagBarProps {
-  showRecruitingOnly: boolean;
-  setShowRecruitingOnly: React.Dispatch<React.SetStateAction<boolean>>;
   selectedAgeTags: string[];
   setSelectedAgeTags: React.Dispatch<React.SetStateAction<string[]>>;
   selectedGenderTags: string[];
@@ -27,6 +22,14 @@ interface FilterTagBarProps {
   setEndDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }
 
+// 모달 타입 정의
+const MODAL_TYPES = {
+  SORT: 'sort',
+  TRAVEL_DATE: 'travelDate',
+  PREFERENCE_TAG: 'preferenceTag',
+} as const;
+
+type ModalType = (typeof MODAL_TYPES)[keyof typeof MODAL_TYPES] | null;
 
 const FilterTagBar: React.FC<FilterTagBarProps> = ({
   showRecruitingOnly,
@@ -39,23 +42,21 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
   setStartDate,
   endDate,
   setEndDate,
-}) => {  const [activeModal, setActiveModal] = useState<string | null>(null);
-
-  // 정렬 타입 state
+}) => {
+  const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [sortType, setSortType] = useState<string>('최신순');
   const swiperRef = useRef<SwiperType | null>(null);
-  
+
   const handleSortConfirm = (selectedSort: string) => {
     setSortType(selectedSort);
     closeModal();
   };
-  
+
   const toggleRecruitingFilter = () => {
     setShowRecruitingOnly(prev => !prev);
-    console.log('현재 모집중 필터:', !showRecruitingOnly ? '모집중만 보기' : '전체 보기');
   };
 
-  const openModal = (modalName: string) => {
+  const openModal = (modalName: ModalType) => {
     if (activeModal === null) {
       setActiveModal(modalName);
     }
@@ -65,21 +66,18 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
     setActiveModal(null);
   };
 
-  // 선호태그 onConfirm
   const handlePreferenceConfirm = (ages: string[], genders: string[]) => {
     setSelectedAgeTags(ages);
     setSelectedGenderTags(genders);
     closeModal();
   };
 
-  // 여행일자 onConfirm
   const handleTravelDateConfirm = (fromDate: Date | undefined, toDate: Date | undefined) => {
     setStartDate(fromDate);
     setEndDate(toDate);
     closeModal();
-  };  
+  };
 
-  
   const totalTagsCount = selectedAgeTags.length + selectedGenderTags.length;
 
   const preferenceTagLabel =
@@ -96,45 +94,78 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
         ~
         ${endDate.getFullYear()}.${(endDate.getMonth() + 1).toString().padStart(2, '0')}.${endDate.getDate().toString().padStart(2, '0')}`;
 
-        // swiper 업데이트
-        useEffect(() => {
-          if (swiperRef.current) {
-            swiperRef.current.update();
-          }
-        }, [travelDateLabel, preferenceTagLabel]);
-        
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.update();
+    }
+  }, [travelDateLabel, preferenceTagLabel]);
+
+  // 모달 함수
+  const renderModal = () => {
+    switch (activeModal) {
+      case MODAL_TYPES.SORT:
+        return (
+          <SortModal
+            onClose={closeModal}
+            onConfirm={handleSortConfirm}
+            sortType={sortType}
+          />
+        );
+      case MODAL_TYPES.TRAVEL_DATE:
+        return (
+          <TravelDateModal
+            onClose={closeModal}
+            onConfirm={handleTravelDateConfirm}
+            selectedStartDate={startDate}
+            selectedEndDate={endDate}
+          />
+        );
+      case MODAL_TYPES.PREFERENCE_TAG:
+        return (
+          <PreferenceTagModal
+            onClose={closeModal}
+            onConfirm={handlePreferenceConfirm}
+            selectedAgeTags={selectedAgeTags}
+            selectedGenderTags={selectedGenderTags}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className='py-5'>
       {/* 필터바 */}
       <Swiper
-  slidesPerView={'auto'}
-  spaceBetween={8}
-  freeMode={true}
-  allowTouchMove={!activeModal}
-  slidesOffsetBefore={16}
-  slidesOffsetAfter={16}
-  className="py-3"
-  onSwiper={(swiper) => {
-    swiperRef.current = swiper;
-  }}
->
+        slidesPerView={'auto'}
+        spaceBetween={8}
+        freeMode={true}
+        allowTouchMove={!activeModal}
+        slidesOffsetBefore={16}
+        slidesOffsetAfter={16}
+        className="py-3"
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
+      >
         <SwiperSlide style={{ width: 'auto' }}>
-        <button
-    onClick={() => openModal('sort')}
-    className="flex items-center gap-1 px-4 py-2 border border-gray-300 rounded-full bg-white text-sm"
-  >
-    {sortType}
-    <Icon iconName={'Bottom'} className="w-4 h-4" />
-  </button>
+          <button
+            onClick={() => openModal(MODAL_TYPES.SORT)}
+            className="flex items-center gap-1 px-4 py-2 border border-stroke2 rounded-full bg-white font-14r"
+          >
+            {sortType}
+            <Icon iconName={'Bottom'} className="w-4 h-4" />
+          </button>
         </SwiperSlide>
 
         <SwiperSlide style={{ width: 'auto' }}>
           <button
             onClick={toggleRecruitingFilter}
-            className={`px-4 py-2 border rounded-full text-sm ${
+            className={`px-4 py-2 border rounded-full font-14r ${
               showRecruitingOnly
-                ? 'bg-green-500 text-white border-green-500'
-                : 'bg-white text-gray-700 border-gray-300'
+                ? 'bg-main1 text-white border-main1'
+                : 'bg-white text-t1 border-stroke2'
             }`}
           >
             모집중
@@ -143,34 +174,39 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
 
         <SwiperSlide style={{ width: 'auto' }}>
           <button
-            onClick={() => openModal('travelDate')}
-            className={`flex items-center gap-1 px-4 py-2 border rounded-full text-sm ${
+            onClick={() => openModal(MODAL_TYPES.TRAVEL_DATE)}
+            className={`flex items-center gap-1 px-4 py-2 border rounded-full font-14r ${
               startDate && endDate
-                ? 'bg-[#13D068] text-white border-[#13D068]'
-                : 'bg-white text-black border-gray-300'
+                ? 'bg-main1 text-white border-main1'
+                : 'bg-white text-t1 border-stroke2'
             }`}
           >
             {travelDateLabel}
-            <Icon iconName={`${
-              startDate && endDate
-                ? 'Bottom_active' : 'Bottom' }`
-            } className="w-4 h-4" />          </button>
+            <Icon
+              iconName={
+                startDate && endDate ? 'Bottom_active' : 'Bottom'
+              }
+              className="w-4 h-4"
+            />
+          </button>
         </SwiperSlide>
 
         <SwiperSlide style={{ width: 'auto' }}>
           <button
-            onClick={() => openModal('preferenceTag')}
+            onClick={() => openModal(MODAL_TYPES.PREFERENCE_TAG)}
             className={`flex items-center gap-1 px-4 py-2 border rounded-full text-sm ${
               totalTagsCount !== 0
-                ? 'bg-[#13D068] text-white border-[#13D068]'
-                : 'bg-white text-black border-gray-300'
+                ? 'bg-main1 text-white border-main1'
+                : 'bg-white text-t1 border-stroke2'
             }`}
           >
             {preferenceTagLabel}
-            <Icon iconName={`${
-              totalTagsCount !== 0
-              ? 'Bottom_active' : 'Bottom' }`
-            } className="w-4 h-4" />
+            <Icon
+              iconName={
+                totalTagsCount !== 0 ? 'Bottom_active' : 'Bottom'
+              }
+              className="w-4 h-4"
+            />
           </button>
         </SwiperSlide>
       </Swiper>
@@ -184,24 +220,7 @@ const FilterTagBar: React.FC<FilterTagBarProps> = ({
       )}
 
       {/* 모달 렌더링 */}
-      {activeModal === 'sort' && <SortModal onClose={closeModal} onConfirm={handleSortConfirm} sortType={sortType} />}
-      {activeModal === 'travelDate' && (
-        <TravelDateModal
-          onClose={closeModal}
-          onConfirm={handleTravelDateConfirm}
-          selectedStartDate={startDate} 
-          selectedEndDate={endDate}    
-        />
-      )}
-
-      {activeModal === 'preferenceTag' && (
-        <PreferenceTagModal
-          onClose={closeModal}
-          onConfirm={handlePreferenceConfirm}
-          selectedAgeTags={selectedAgeTags}
-          selectedGenderTags={selectedGenderTags}
-        />
-      )}
+      {renderModal()}
     </div>
   );
 };

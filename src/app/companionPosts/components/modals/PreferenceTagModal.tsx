@@ -7,6 +7,10 @@ interface PreferenceTagModalProps {
   selectedGenderTags: string[];
 }
 
+// 선호 태그
+const AGE_TAGS = ['20대', '30대', '40대', '50대', '60대'];
+const GENDER_TAGS = ['여성', '남성', '혼성'];
+
 const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
   onClose,
   onConfirm,
@@ -23,22 +27,17 @@ const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
 
   const toggleAgeTag = (tag: string) => {
     setLocalAgeTags(prev =>
-      prev.includes(tag)
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag]
+      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
     );
   };
 
   const toggleGenderTag = (tag: string) => {
     setLocalGenderTags(prev =>
-      prev.includes(tag)
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag]
+      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
     );
   };
 
   const handleComplete = () => {
-    console.log('선호태그:', localAgeTags, localGenderTags);
     onConfirm(localAgeTags, localGenderTags);
   };
 
@@ -46,25 +45,24 @@ const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
 
   return (
     <div
-  className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50"
-  onMouseDown={(e) => e.stopPropagation()}
-  onTouchStart={(e) => e.stopPropagation()}
->
-      <h3 className="text-lg font-bold mb-4">선호 태그 선택</h3>
+      className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50"
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
+    >
+      <h3 className="font-20b mb-4 text-center">선호 태그 선택</h3>
 
       {/* 연령대 */}
       <div className="mb-6">
-        <p className="font-medium mb-2">연령대</p>
-        <div
-        className="whitespace-nowrap py-3 flex gap-2 cursor-grab active:cursor-grabbing"
-        >           {['20대', '30대', '40대', '50대', '60대'].map(age => (
+        <p className="font-16b mb-2">연령대</p>
+        <div className="whitespace-nowrap py-3 flex gap-2 cursor-grab active:cursor-grabbing">
+          {AGE_TAGS.map(age => (
             <button
               key={age}
               onClick={() => toggleAgeTag(age)}
-              className={`px-4 py-2 rounded-full border ${
+              className={`px-4 py-2 rounded-full border font-16r ${
                 localAgeTags.includes(age)
-                  ? 'bg-green-500 text-white border-green-500'
-                  : 'bg-white text-gray-700 border-gray-300'
+                  ? 'bg-main1 text-white border-main1'
+                  : 'bg-white text-t2 border-stroke2'
               }`}
             >
               {age}
@@ -75,16 +73,16 @@ const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
 
       {/* 성별 */}
       <div className="mb-6">
-        <p className="font-medium mb-2">성별</p>
+        <p className="font-16b mb-2">성별</p>
         <div className="flex flex-wrap gap-2">
-          {['여성', '남성', '혼성'].map(gender => (
+          {GENDER_TAGS.map(gender => (
             <button
               key={gender}
               onClick={() => toggleGenderTag(gender)}
-              className={`px-4 py-2 rounded-full border ${
+              className={`px-4 py-2 rounded-full border font-16r ${
                 localGenderTags.includes(gender)
-                  ? 'bg-green-500 text-white border-green-500'
-                  : 'bg-white text-gray-700 border-gray-300'
+                  ? 'bg-main1 text-white border-main1'
+                  : 'bg-white text-t2 border-stroke2'
               }`}
             >
               {gender}
@@ -98,7 +96,7 @@ const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
         {/* 닫기 */}
         <button
           onClick={onClose}
-          className="w-1/2 px-6 py-3 border border-gray-300 text-gray-800 font-medium rounded-[8px]"
+          className="w-1/2 px-6 py-3 border border-t4 font-16r rounded-[8px]"
         >
           닫기
         </button>
@@ -107,10 +105,10 @@ const PreferenceTagModal: React.FC<PreferenceTagModalProps> = ({
         <button
           onClick={handleComplete}
           disabled={!isActive}
-          className={`w-1/2 px-6 py-3 font-medium rounded-[8px] ${
+          className={`w-1/2 px-6 py-3 font-16r rounded-[8px] ${
             isActive
-              ? 'bg-green-500 text-white'
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              ? 'bg-main1 text-white'
+              : 'bg-disabled text-t3 cursor-not-allowed'
           }`}
         >
           선택완료

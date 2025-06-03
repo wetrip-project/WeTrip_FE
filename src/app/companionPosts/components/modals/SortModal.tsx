@@ -6,7 +6,10 @@ interface SortModalProps {
   sortType: string;
 }
 
-const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType}) => {
+// 정렬 태그
+const SORT_OPTIONS = ['최신순', '인기순'];
+
+const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) => {
   const [selectedOption, setSelectedOption] = useState<string>(sortType || '');
 
   const handleComplete = () => {
@@ -18,17 +21,17 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType}) =>
 
   return (
     <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50">
-      <h3 className="text-xl font-bold mb-4 text-center">최신순 정렬</h3>
+      <h3 className="font-20b mb-4 text-center">리스트 정렬</h3>
 
       <div className="flex gap-2">
-        {['최신순', '인기순'].map(option => (
+        {SORT_OPTIONS.map(option => (
           <button
             key={option}
             onClick={() => setSelectedOption(option)}
-            className={`px-4 py-3 rounded-3xl border text-center text-[16px] ${
+            className={`px-4 py-3 rounded-3xl border text-center font-16r ${
               selectedOption === option
-                ? 'bg-green-500 text-white border-green-500'
-                : 'bg-white text-[#616161] border-gray-300'
+                ? 'bg-main1 text-white border-main1'
+                : 'bg-white text-t2 border-stroke2'
             }`}
           >
             {option}
@@ -36,24 +39,22 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType}) =>
         ))}
       </div>
 
-      {/* 닫기 / 선택완료 버튼 */}
+      {/* 닫기, 선택완료 버튼 */}
       <div className="flex justify-between mt-6 gap-[12px]">
-        {/* 닫기 버튼 */}
         <button
           onClick={onClose}
-          className="w-1/2 px-6 py-3 border border-gray-300 text-gray-800 font-medium rounded-[8px]"
+          className="w-1/2 px-6 py-3 border border-t4 font-16r rounded-[8px]"
         >
           닫기
         </button>
 
-        {/* 선택완료 버튼 */}
         <button
           onClick={handleComplete}
           disabled={!isActive}
-          className={`w-1/2 px-6 py-3 font-medium rounded-[8px] ${
+          className={`w-1/2 px-6 py-3 font-16r rounded-[8px] ${
             isActive
-              ? 'bg-green-500 text-white'
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              ? 'bg-main1 text-white'
+              : 'bg-disabled text-t3 cursor-not-allowed'
           }`}
         >
           선택완료

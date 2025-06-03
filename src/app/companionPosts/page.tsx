@@ -12,7 +12,8 @@ type Post = {
   description: string;
   tags: string[];
 };
-//임시 더미데이터입니다!
+
+//임시 더미데이터입니다.
 const dummyPosts: Post[] = [
   {
     id: 1,
@@ -36,7 +37,7 @@ const dummyPosts: Post[] = [
     period: '25.08.05~25.08.10',
     title: '강릉 커피거리 투어 멤버 모집',
     description: '커피 좋아하는 분들과 강릉 여행 가요 ☕️',
-    tags: ['#40대', '#혼성',],
+    tags: ['#40대', '#혼성'],
   },
   {
     id: 4,
@@ -46,7 +47,136 @@ const dummyPosts: Post[] = [
     description: '자연을 좋아하는 분, 걷는 거 좋아하는 분 환영!',
     tags: ['#남성', '#40대', '#50대'],
   },
+  {
+    id: 5,
+    status: '모집완료',
+    period: '25.06.10~25.06.15',
+    title: '전주 한옥마을 맛집 투어',
+    description: '전주 한옥마을에서 한옥과 맛집을 즐겨요!',
+    tags: ['#여성', '#50대'],
+  },
+  {
+    id: 6,
+    status: '모집중',
+    period: '25.07.20~25.07.25',
+    title: '속초 해수욕장 당일치기 모집',
+    description: '속초 해수욕장 가볍게 놀러가요~',
+    tags: ['#혼성', '#30대'],
+  },
+  {
+    id: 7,
+    status: '모집중',
+    period: '25.08.15~25.08.20',
+    title: '광주 미술관 투어',
+    description: '미술 좋아하시는 분들과 함께 관람해요.',
+    tags: ['#여성', '#40대'],
+  },
+  {
+    id: 8,
+    status: '모집완료',
+    period: '25.09.10~25.09.15',
+    title: '경주 역사 유적지 투어',
+    description: '역사 좋아하는 분들 환영!',
+    tags: ['#남성', '#50대'],
+  },
+  {
+    id: 9,
+    status: '모집중',
+    period: '25.10.01~25.10.05',
+    title: '서울 근교 캠핑 모임',
+    description: '가벼운 캠핑 모임 함께해요~',
+    tags: ['#혼성', '#20대'],
+  },
+  {
+    id: 10,
+    status: '모집중',
+    period: '25.10.10~25.10.15',
+    title: '포항 해산물 투어',
+    description: '포항으로 해산물 투어 떠나요!',
+    tags: ['#여성', '#60대'],
+  },
+  {
+    id: 11,
+    status: '모집완료',
+    period: '25.06.15~25.06.20',
+    title: '대구 야시장 나들이',
+    description: '대구 야시장 구경하며 먹거리 투어!',
+    tags: ['#혼성', '#30대'],
+  },
+  {
+    id: 12,
+    status: '모집중',
+    period: '25.07.05~25.07.10',
+    title: '울산 고래문화마을 탐방',
+    description: '울산 고래문화마을 구경 같이가요~',
+    tags: ['#남성', '#50대'],
+  },
+  {
+    id: 13,
+    status: '모집중',
+    period: '25.08.01~25.08.05',
+    title: '청주 고인돌 공원 산책',
+    description: '조용히 산책 즐기실 분!',
+    tags: ['#여성', '#60대'],
+  },
+  {
+    id: 14,
+    status: '모집완료',
+    period: '25.09.20~25.09.25',
+    title: '수원 화성 투어',
+    description: '수원 화성 관광 함께 가실 분',
+    tags: ['#혼성', '#40대'],
+  },
+  {
+    id: 15,
+    status: '모집중',
+    period: '25.10.20~25.10.25',
+    title: '춘천 닭갈비 먹방 투어',
+    description: '춘천으로 먹방여행 떠나요!',
+    tags: ['#여성', '#30대'],
+  },
+  {
+    id: 16,
+    status: '모집중',
+    period: '25.11.01~25.11.05',
+    title: '부여 백제문화 탐방',
+    description: '백제문화 유적지 투어',
+    tags: ['#혼성', '#50대'],
+  },
+  {
+    id: 17,
+    status: '모집완료',
+    period: '25.11.10~25.11.15',
+    title: '강원도 가을 단풍 투어',
+    description: '가을 단풍 명소 투어 함께해요',
+    tags: ['#남성', '#40대'],
+  },
+  {
+    id: 18,
+    status: '모집중',
+    period: '25.12.01~25.12.05',
+    title: '부산 불꽃축제 관람',
+    description: '부산 불꽃축제 함께 보러가요!',
+    tags: ['#혼성', '#20대'],
+  },
+  {
+    id: 19,
+    status: '모집중',
+    period: '25.12.10~25.12.15',
+    title: '인천 차이나타운 투어',
+    description: '차이나타운 먹거리 투어!',
+    tags: ['#여성', '#40대'],
+  },
+  {
+    id: 20,
+    status: '모집중',
+    period: '26.01.01~26.01.05',
+    title: '강릉 해돋이 투어',
+    description: '새해 해돋이 보러가요 🌅',
+    tags: ['#남성', '#20대'],
+  },
 ];
+
 
 const CompanionPostsPage = () => {
   // 모집중 필터 상태
@@ -56,7 +186,7 @@ const CompanionPostsPage = () => {
   const [selectedGenderTags, setSelectedGenderTags] = useState<string[]>([]);
   // 여행일자 상태
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-const [endDate, setEndDate] = useState<Date | undefined>(undefined);
+  const [endDate, setEndDate] = useState<Date | undefined>(undefined);
 
   
   const filteredPosts = dummyPosts.filter(post => {
@@ -74,37 +204,35 @@ const [endDate, setEndDate] = useState<Date | undefined>(undefined);
       : selectedGenderTags.some(tag => post.tags.includes(`#${tag}`));
   
     // 여행일자 필터
-  const periodParts = post.period.split('~');
-  const postStartDate = new Date(`20${periodParts[0].replace(/\./g, '-')}`);
-  const postEndDate = new Date(`20${periodParts[1].replace(/\./g, '-')}`);
+    const periodParts = post.period.split('~');
+    const postStartDate = new Date(`20${periodParts[0].replace(/\./g, '-')}`);
+    const postEndDate = new Date(`20${periodParts[1].replace(/\./g, '-')}`);
 
-  const dateMatch =
+    const dateMatch =
     !startDate || !endDate
       ? true
       : postEndDate >= startDate && postStartDate <= endDate;
 
-  // 최종 반환
-  return statusMatch && ageMatch && genderMatch && dateMatch;
+    // 최종 반환
+    return statusMatch && ageMatch && genderMatch && dateMatch;
   });
   
 
   return (
     <div className='py-5'>
-      <div>검색창</div>
+      <div className='pl-5'>임시검색창</div>
       <FilterTagBar
-  showRecruitingOnly={showRecruitingOnly}
-  setShowRecruitingOnly={setShowRecruitingOnly}
-  selectedAgeTags={selectedAgeTags}
-  setSelectedAgeTags={setSelectedAgeTags}
-  selectedGenderTags={selectedGenderTags}
-  setSelectedGenderTags={setSelectedGenderTags}
-  startDate={startDate}
-  setStartDate={setStartDate}
-  endDate={endDate}
-  setEndDate={setEndDate}
-/>
-
-
+        showRecruitingOnly={showRecruitingOnly}
+        setShowRecruitingOnly={setShowRecruitingOnly}
+        selectedAgeTags={selectedAgeTags}
+        setSelectedAgeTags={setSelectedAgeTags}
+        selectedGenderTags={selectedGenderTags}
+        setSelectedGenderTags={setSelectedGenderTags}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+      />
       <CompanionPostList posts={filteredPosts} />
     </div>
   );

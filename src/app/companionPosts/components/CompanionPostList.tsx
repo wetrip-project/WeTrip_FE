@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
 
 type Post = {
   id: number;
@@ -14,28 +16,67 @@ type CompanionPostListProps = {
 };
 
 const CompanionPostList = ({ posts }: CompanionPostListProps) => {
+  const [visiblePosts, setVisiblePosts] = useState<Post[]>([]);
+  const [page, setPage] = useState(1);
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  const POSTS_PER_PAGE = 10; // 한 번에 보여줄 개수
+
+  // 페이지 바뀔 때마다 visiblePosts 업데이트
+  useEffect(() => {
+    const start = 0;
+    const end = page * POSTS_PER_PAGE;
+    setVisiblePosts(posts.slice(start, end));
+  }, [page, posts]);
+
+  // Intersection Observer
+  useEffect(() => {
+    const currentRef = observerRef.current;
+    if (!currentRef) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // 이미 모든 포스트를 로드했으면 더 이상 페이지 증가 X
+          if (page * POSTS_PER_PAGE >= posts.length) return;
+          setPage((prev) => prev + 1);
+        }
+      },
+      {
+        threshold: 1.0,
+      }
+    );
+
+    observer.observe(currentRef);
+
+    // cleanup
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, [page, posts.length]); 
+
   return (
-    <ul className='margin-[26px] px-5'>
-      {posts.map((post) => (
+    <ul className='my-[26px] px-5'>
+      {visiblePosts.map((post) => (
         <li
           key={post.id}
-        className='border-b border-[#E7ECEA] py-4'
+          className='border-b border-stroke2 py-4'
         >
           <div className='flex items-center gap-[6px]'>
             <strong
-              className={`text-xs ${post.status === '모집중' ? 'text-[#13DF6F] border-[#13DF6F]' : 'text-[#9E9E9E] border-[#9E9E9E] '} border rounded-[4px] inline-block px-[5px] py-[1px]`}
+              className={`font-12r ${post.status === '모집중' ? 'text-main1 border-main1' : 'text-t3 border-t3'} border rounded-[4px] inline-block px-[5px] py-[1px]`}
             >
               {post.status}
             </strong>
-            <p className='text-xs text-#9E9E9E'>{post.period}</p>
+            <p className='font-12r text-t3'>{post.period}</p>
           </div>
-          <h2 className='text-[#212221] font-bold mt-1 mb-3'>{post.title}</h2>
-          <p className='text-[#616161] text-sm mb-3'>{post.description}</p>
+          <h2 className='font-16b mt-1 mb-3'>{post.title}</h2>
+          <p className='text-t2 font-14r mb-3'>{post.description}</p>
           <div className='flex flex-wrap gap-[6px]'>
-            {post.tags.map((tag, index) => (
+            {post.tags.map((tag) => (
               <span
-                key={index}
-                className='inline-block border border-[#E7ECEA] text-[#9E9E9E] text-xs rounded-[2px] px-[6px] py-[2px]'
+                key={tag} 
+                className='inline-block border border-stroke2 text-t3 font-12r rounded-[2px] px-[6px] py-[2px]'
               >
                 {tag}
               </span>
@@ -43,6 +84,8 @@ const CompanionPostList = ({ posts }: CompanionPostListProps) => {
           </div>
         </li>
       ))}
+      {/* trigger */}
+      <div ref={observerRef} className='h-5' />
     </ul>
   );
 };
