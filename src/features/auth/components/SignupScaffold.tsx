@@ -1,10 +1,10 @@
 'use client'
 
 import { ProgressBar } from '@/components/ProgressBar'
-import { useSignupStore } from '@/stores/hooks/signupStore'
+import { useSignupStore } from '@/stores/zustand/signupStore'
 
 const SignupScaffold = () => {
-  const { step } = useSignupStore()
+  const step = useSignupStore((state) => state.step)
   const stepMap = {
     1: 80,
     2: 160,
