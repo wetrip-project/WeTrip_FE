@@ -1,11 +1,12 @@
+'use client'
+
 import { Button } from '@/components/Button'
 import ImageUploader from '@/components/ImageUploader/imageUploader'
-import { useEffect } from 'react'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 const Step4 = () => {
-  useEffect(() => {
-    console.log('Step4 렌더링')
-  }, [])
+  const { handleChange } = useImageUpload()
+
   return (
     <div className='flex h-[calc(100svh-62px)] w-[320px] flex-col justify-between'>
       <div className='flex h-[305px] w-[320px] flex-col gap-4'>
@@ -20,10 +21,23 @@ const Step4 = () => {
       </div>
       <div className='flex h-[152px] w-[320px] flex-col gap-3 py-[14px]'>
         <Button
-          children={'사진 등록하기'}
+          children={
+            <input
+              type='file'
+              id='avator'
+              accept='image/png, image/jpeg'
+              multiple={false}
+              onChange={handleChange}
+              className='absolute top-0 left-0 h-full w-full opacity-0'
+            />
+          }
           variant={'activation'}
           size={'lg'}
           className='font-16r rounded-md'
+          onClick={() => {
+            console.log('button 클릭됨')
+            handleChange
+          }}
         />
         <Button
           children={'나중에 하기'}
