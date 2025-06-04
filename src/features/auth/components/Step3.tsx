@@ -2,15 +2,12 @@
 import { Button } from '@/components/Button'
 import MultiSelectGroup from '@/components/MultiSelectionGroup/MultiSelectGroup'
 import interestOptions from '@/constants/options/inerestOptions'
-import { useSignupStore } from '@/stores/hooks/signupStore'
 
 type Props = {
   onNext: () => void
 }
 
 const TripFavorSetting = ({ onNext }: Props) => {
-  const { setStep } = useSignupStore()
-
   return (
     <div className='relative h-[calc(100svh-62px)] w-[320px]'>
       <div className='flex h-[423px] w-[320px] flex-col gap-4'>

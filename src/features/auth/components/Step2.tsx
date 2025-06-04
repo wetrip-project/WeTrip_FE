@@ -3,14 +3,12 @@ import { Button } from '@/components/Button'
 import SingleSelectGroup from '@/components/SelectionGroup/SingleSelectGroup'
 import ageOptions from '@/constants/options/ageOptions'
 import genderOptions from '@/constants/options/genderOptions'
-import { useSignupStore } from '@/stores/hooks/signupStore'
 
 type Props = {
   onNext: () => void
 }
 
 const Step2 = ({ onNext }: Props) => {
-  const { setStep } = useSignupStore()
   return (
     <div className='relative flex h-[calc(100vh-62px)] w-[320px] flex-col gap-4'>
       <div className='font-20b'>성별과 나이대를 선택해주세요</div>
