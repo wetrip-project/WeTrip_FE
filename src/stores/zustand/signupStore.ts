@@ -7,5 +7,7 @@ type SignupStore = {
 
 export const useSignupStore = create<SignupStore>((set) => ({
   step: 1,
-  setStep: (step) => set({ step }),
+  setStep: (step) => {
+    set({ step: step })
+  },
 }))
