@@ -1,13 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useSignupStore } from '@/stores/zustand/signupStore'
+import { useEffect } from 'react'
 import Step1 from 'src/features/auth/components/Step1'
 import Step2 from 'src/features/auth/components/Step2'
 import Step3 from 'src/features/auth/components/Step3'
 import Step4 from 'src/features/auth/components/Step4'
 
 export default function SignupPage() {
-  const [step, setStep] = useState(1)
+  const { step, setStep } = useSignupStore()
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
