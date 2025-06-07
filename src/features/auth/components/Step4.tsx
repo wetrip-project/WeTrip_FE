@@ -5,7 +5,7 @@ import ImageUploader from '@/components/ImageUploader/imageUploader'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 const Step4 = () => {
-  const { handleChange } = useImageUpload()
+  const { preview, handleChange, uploadImage } = useImageUpload()
 
   return (
     <div className='flex h-[calc(100svh-62px)] w-[320px] flex-col justify-between'>
@@ -15,7 +15,10 @@ const Step4 = () => {
           <br /> 더 쉽게 동행을 구할 수 있어요!
         </div>
         <div className='flex w-[320px] flex-col items-center justify-center gap-3'>
-          <ImageUploader />
+          <ImageUploader
+            preview={typeof preview === 'string' ? preview : ''}
+            handleChange={handleChange}
+          />
           <div className='font-26b'>닉네임</div>
         </div>
       </div>
@@ -28,16 +31,12 @@ const Step4 = () => {
               accept='image/png, image/jpeg'
               multiple={false}
               onChange={handleChange}
-              className='absolute top-0 left-0 h-full w-full opacity-0'
+              className='absolute top-0 left-0 h-[50px] w-[320px] opacity-0'
             />
           }
           variant={'activation'}
           size={'lg'}
-          className='font-16r rounded-md'
-          onClick={() => {
-            console.log('button 클릭됨')
-            handleChange
-          }}
+          className='font-16r relative rounded-md'
         />
         <Button
           children={'나중에 하기'}
