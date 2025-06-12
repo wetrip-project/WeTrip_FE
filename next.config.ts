@@ -32,6 +32,15 @@ const nextConfig: NextConfig = withNextIntl({
       },
     },
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/main',
+        permanent: true,
+      },
+    ]
+  },
 })
 
 export default withPWA(nextConfig)
