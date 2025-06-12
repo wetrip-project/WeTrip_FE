@@ -1,6 +1,17 @@
 import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
+import NextPWA from 'next-pwa'
 
-const nextConfig: NextConfig = {
+const withNextIntl = createNextIntlPlugin()
+
+const withPWA = NextPWA({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development' || process.env.DISABLE_PWA === 'true',
+  register: true,
+  skipWaiting: true,
+})
+
+const nextConfig: NextConfig = withNextIntl({
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -21,6 +32,6 @@ const nextConfig: NextConfig = {
       },
     },
   },
-}
+})
 
-export default nextConfig
+export default withPWA(nextConfig)
