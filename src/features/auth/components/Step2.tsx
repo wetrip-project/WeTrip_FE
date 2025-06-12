@@ -4,9 +4,13 @@ import SingleSelectGroup from '@/components/SelectionGroup/SingleSelectGroup'
 import ageOptions from '@/constants/options/ageOptions'
 import genderOptions from '@/constants/options/genderOptions'
 
-const page = () => {
+type Props = {
+  onNext: () => void
+}
+
+const Step2 = ({ onNext }: Props) => {
   return (
-    <div className='relative flex h-[calc(100vh-62px)] w-[320px] flex-col gap-4 pt-[25px]'>
+    <div className='relative flex h-[calc(100vh-62px)] w-[320px] flex-col gap-4'>
       <div className='font-20b'>성별과 나이대를 선택해주세요</div>
       <div className='flex flex-col gap-2'>
         <div className='font-14b'>성별</div>
@@ -36,10 +40,11 @@ const page = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
+          onClick={onNext}
         />
       </div>
     </div>
   )
 }
 
-export default page
+export default Step2

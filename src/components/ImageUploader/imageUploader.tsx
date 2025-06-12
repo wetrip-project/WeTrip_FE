@@ -1,18 +1,15 @@
 'use client'
 
-import { useImageUpload } from '@/hooks/useImageUpload'
 import { UploadImg } from '../Icon'
 import defaultImg from 'public/assets/icons/defaultAvator.png'
 
-export default function ImageUploader() {
-  const { preview, handleChange, uploadImage } = useImageUpload()
+type Props = {
+  preview: string
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-  const handleUploadClick = async () => {
-    console.log('업로드 성공')
-    await uploadImage()
-  }
-
-  const imageSrc = typeof preview === 'string' ? preview : preview?.src || defaultImg.src
+export default function ImageUploader({ preview, handleChange }: Props) {
+  const imageSrc = preview || defaultImg.src
 
   return (
     <div className='relative h-[145px] w-[137px]'>

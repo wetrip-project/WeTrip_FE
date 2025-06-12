@@ -3,9 +3,13 @@ import { Button } from '@/components/Button'
 import MultiSelectGroup from '@/components/MultiSelectionGroup/MultiSelectGroup'
 import interestOptions from '@/constants/options/inerestOptions'
 
-const page = () => {
+type Props = {
+  onNext: () => void
+}
+
+const TripFavorSetting = ({ onNext }: Props) => {
   return (
-    <div className='relative h-[calc(100svh-62px)] w-[320px] pt-[25px]'>
+    <div className='relative h-[calc(100svh-62px)] w-[320px]'>
       <div className='flex h-[423px] w-[320px] flex-col gap-4'>
         <div className='font-20b'>
           선호하는 여행 스타일을
@@ -27,10 +31,11 @@ const page = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
+          onClick={onNext}
         />
       </div>
     </div>
   )
 }
 
-export default page
+export default TripFavorSetting
