@@ -1,4 +1,4 @@
 cd ../
 mkdir output
-cp -R ./team-repository-name/* ./output
-cp -R ./output ./team-repository-name/
+cp -R ./WeTrip_FE/* ./output
+cp -R ./output ./WeTrip_FE/
