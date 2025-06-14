@@ -9,7 +9,7 @@ export default function mainLayout({
     <div className='bg-b2 h-[100svh] w-[360px]'>
       <div className='w-full px-5'>
         <div className='flex w-[320px] justify-between py-3'>
-          <Icon iconName={'WetripTextLogo'} />
+          <Icon iconName={'WetripLogo'} />
           <Icon iconName={'Alarm'} />
         </div>
       </div>

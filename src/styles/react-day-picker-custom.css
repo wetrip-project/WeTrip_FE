@@ -1,0 +1,22 @@
+
+.rdp-months{
+    margin: 0 auto;
+}
+/* 화살표 버튼 */
+.rdp-nav{
+    left: 50%;
+    transform: translateX(-50%);
+}
+.rdp-nav .rdp-chevron {
+    fill: #616161;
+    width: 20px;
+  }
+.rdp-nav .rdp-button_next{
+    margin-left: 100px;
+  } 
+
+/* 현재 월*/
+.rdp-caption_label{
+    font-weight: 500;
+    margin: 0 auto;
+}
