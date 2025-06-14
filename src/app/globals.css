@@ -11,8 +11,6 @@
   layer(
     utilities
   );
-  @import '../styles/react-day-picker-custom.css';
-
 
 @theme {
   /* Main Colors */
@@ -185,4 +183,3 @@
     );
   }
 }
-

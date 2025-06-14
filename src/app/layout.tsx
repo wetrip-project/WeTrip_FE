@@ -22,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={cn(pretendardFont.className, 'mx-auto min-h-[100dvh] w-[360px] border-r border-l pb-[65px]')}
+        className={cn(
+          pretendardFont.className,
+          'mx-auto min-h-[100dvh] w-[360px] border-l border-r pb-[65px]',
+        )}
       >
         {children}
         <BottomNav />
