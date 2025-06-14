@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button'
 import ImageUploader from '@/components/ImageUploader/imageUploader'
+import { ChangeEvent } from 'react'
 
 const page = () => {
   return (
@@ -10,7 +11,12 @@ const page = () => {
           <br /> 더 쉽게 동행을 구할 수 있어요!
         </div>
         <div className='flex w-[320px] flex-col items-center justify-center gap-3'>
-          <ImageUploader />
+          {/* <ImageUploader
+            preview={''}
+            handleChange={function (e: ChangeEvent<HTMLInputElement>): void {
+              throw new Error('Function not implemented.')
+            }}
+          /> */}
           <div className='font-26b'>닉네임</div>
         </div>
       </div>

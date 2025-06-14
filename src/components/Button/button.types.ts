@@ -1,5 +1,5 @@
 import { VariantProps } from 'class-variance-authority'
-import { buttonVariants } from '@/components/Button/button.cva'
+import { buttonVariants } from './Button.cva'
 
 export type ButtonVariantProps = VariantProps<typeof buttonVariants>
 export type RequiredVariants = {
