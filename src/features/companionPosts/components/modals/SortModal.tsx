@@ -1,15 +1,16 @@
+'use client';
+
 import React, { useState } from 'react';
 
 interface SortModalProps {
   onClose: () => void;
-  onConfirm: (selectedSort: string) => void; 
+  onConfirm: (selectedSort: string) => void;
   sortType: string;
 }
 
-// 정렬 태그
 const SORT_OPTIONS = ['최신순', '인기순'];
 
-const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) => {
+function SortModal({ onClose, onConfirm, sortType }: SortModalProps) {
   const [selectedOption, setSelectedOption] = useState<string>(sortType || '');
 
   const handleComplete = () => {
@@ -24,7 +25,7 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) =
       <h3 className="font-20b mb-4 text-center">리스트 정렬</h3>
 
       <div className="flex gap-2">
-        {SORT_OPTIONS.map(option => (
+        {SORT_OPTIONS.map((option) => (
           <button
             key={option}
             onClick={() => setSelectedOption(option)}
@@ -39,7 +40,6 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) =
         ))}
       </div>
 
-      {/* 닫기, 선택완료 버튼 */}
       <div className="flex justify-between mt-6 gap-[12px]">
         <button
           onClick={onClose}
@@ -62,6 +62,6 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) =
       </div>
     </div>
   );
-};
+}
 
 export default SortModal;
