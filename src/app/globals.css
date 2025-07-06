@@ -240,22 +240,38 @@
   background-color: var(--color-main1);
   border: 0;
 }
-.rdp-weeks .rdp-range_start .rdp-day_button:before{
-  right: 0px;
-}
-.rdp-weeks .rdp-range_end .rdp-day_button:before, .rdp-weeks .rdp-range_start .rdp-day_button:before {content: "";
+/* 선택됐을때 바탕색 */
+.rdp-weeks .rdp-range_start .rdp-day_button::after,
+.rdp-weeks .rdp-range_end .rdp-day_button::before {
+  content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 50%;
   height: 100%;
   background: #edfff5;
-z-index: -1;}
-.rdp-weeks .rdp-range_end .rdp-day_button:before{
-  left: 0px;
+  z-index: -1;
 }
+
+/* 오른쪽 배경 */
+.rdp-weeks .rdp-range_start .rdp-day_button::after {
+  right: 0;
+}
+
+/* 왼쪽 배경 */
+.rdp-weeks .rdp-range_end .rdp-day_button::before {
+  left: 0;
+}
+
+/* start+end가 같은 날인 경우에는 before/after를 모두 제거 */
+.rdp-weeks .rdp-range_start.rdp-range_end .rdp-day_button::before,
+.rdp-weeks .rdp-range_start.rdp-range_end .rdp-day_button::after {
+  content: none;
+}
+
 .rdp-weeks .rdp-range_middle {
   color: var(--color-t1);
+  background: #edfff5;
 }
 .today-marker::after {
   content: '오늘';
