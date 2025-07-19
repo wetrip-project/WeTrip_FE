@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { DayPicker, DateRange, Formatters } from 'react-day-picker';
+import { DayPicker, DateRange, Formatters, NavProps } from 'react-day-picker';
 import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
+import Icon from '@/components/Icon/icon';
 
 interface TravelDateModalProps {
   onClose: () => void;
@@ -44,9 +45,21 @@ export default function TravelDateModal({
 
   const isActive = !!range.from && !!range.to;
 
+
+  const CustomNav = ({ onNextClick, onPreviousClick }: NavProps) => (
+    <div className="absolute w-full flex justify-evenly top-[14px]">
+      <button onClick={onPreviousClick}>
+      <Icon iconName={'DaypickerArrow'} className='scale-x-[-1]'/>
+      </button>
+      <button onClick={onNextClick}>
+      <Icon iconName={'DaypickerArrow'} className=''/>
+      </button>
+    </div>
+  );
+
   return (
-    <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50">
-      <h3 className="mb-4 text-center font-20b">여행일자 선택</h3>
+    <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl px-5 pt-[34px] pb-5 shadow-lg z-50">
+      <h3 className="mb-4 text-center font-20b">동행일자 선택</h3>
 
       <DayPicker
         mode="range"
@@ -66,12 +79,15 @@ export default function TravelDateModal({
           caption: 'flex justify-center items-center relative mb-2 text-[16px] font-semibold',
           caption_label: 'text-center w-full flex items-center justify-center font-20r',
           nav: 'absolute w-full flex justify-between px-4 top-1',
-          weekday: 'text-t2 font-14r mt-4 mb-4',
+          weekday: 'text-t2 font-14r pt-4 pb-4',
         }}
         formatters={customFormatters}
         modifiersClassNames={{
           today: 'today-marker',
           disabled: 'disabled-day',
+        }}
+        components={{
+          Nav: CustomNav
         }}
       />
 
