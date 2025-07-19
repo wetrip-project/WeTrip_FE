@@ -48,11 +48,11 @@ function PreferenceTagModal({
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50"
+      className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl px-5 pt-[34px] pb-5 shadow-lg z-50"
       onMouseDown={(e) => e.stopPropagation()}
       onTouchStart={(e) => e.stopPropagation()}
     >
-      <h3 className="font-20b mb-4 text-center">선호 태그 선택</h3>
+      <h3 className="font-20b mb-8 text-center">선호 태그 선택</h3>
 
       {/* 연령대 */}
       <div className="mb-6">
