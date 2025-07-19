@@ -1,15 +1,18 @@
+'use client';
+
+import Icon from '@/components/Icon/icon';
 import React, { useState } from 'react';
+
 
 interface SortModalProps {
   onClose: () => void;
-  onConfirm: (selectedSort: string) => void; 
+  onConfirm: (selectedSort: string) => void;
   sortType: string;
 }
 
-// 정렬 태그
-const SORT_OPTIONS = ['최신순', '인기순'];
+const SORT_OPTIONS = ['최신순', '인기순', '여행일자 빠른 순'];
 
-const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) => {
+function SortModal({ onClose, onConfirm, sortType }: SortModalProps) {
   const [selectedOption, setSelectedOption] = useState<string>(sortType || '');
 
   const handleComplete = () => {
@@ -20,30 +23,30 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) =
   const isActive = !!selectedOption;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl p-6 shadow-lg z-50">
-      <h3 className="font-20b mb-4 text-center">리스트 정렬</h3>
-
-      <div className="flex gap-2">
-        {SORT_OPTIONS.map(option => (
+    <div className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl px-5 pt-[34px] pb-5 shadow-lg z-50">
+      <h3 className="font-20b mb-8 text-center">보기 정렬</h3>
+      <div className="flex gap-5 flex-col">
+        {SORT_OPTIONS.map((option) => (
           <button
             key={option}
             onClick={() => setSelectedOption(option)}
-            className={`px-4 py-3 rounded-3xl border text-center font-16r ${
+            className={`flex gap-[19px] items-center rounded-3xl text-left font-16r ${
               selectedOption === option
-                ? 'bg-main1 text-white border-main1'
-                : 'bg-white text-t2 border-stroke2'
+                ? 'text-main1 font-16b'
+                : 'text-t1'
             }`}
           >
-            {option}
+            {option} {
+              selectedOption === option
+                && <Icon iconName={'SellectCheck'} className='mb-[2px]'/>}
           </button>
         ))}
       </div>
 
-      {/* 닫기, 선택완료 버튼 */}
       <div className="flex justify-between mt-6 gap-[12px]">
         <button
           onClick={onClose}
-          className="w-1/2 px-6 py-3 border border-t4 font-16r rounded-[8px]"
+          className="w-1/2 px-6 py-3 border border-t4 font-16r rounded-[8px] text-t1"
         >
           닫기
         </button>
@@ -62,6 +65,6 @@ const SortModal: React.FC<SortModalProps> = ({ onClose, onConfirm, sortType }) =
       </div>
     </div>
   );
-};
+}
 
 export default SortModal;

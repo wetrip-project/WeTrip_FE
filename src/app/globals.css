@@ -183,3 +183,105 @@
     );
   }
 }
+
+/* date-picker */
+/* 화살표 */
+.rdp-root .rdp-button_next, .rdp-root .rdp-button_previous{
+  position: absolute;
+    transform: translateX(0);
+}
+.rdp-root .rdp-button_next{
+  right: calc(50% - 77px);
+
+}
+.rdp-root .rdp-button_previous{
+    left: calc(50% - 77px);
+}
+/* 모달 전체 틀, 월 */
+.rdp-months .rdp-chevron{
+  fill: var(--color-t2);
+}
+.rdp-root .rdp-months{
+  display: contents;
+}
+.rdp-root .rdp-month_grid{
+  width: 100%;
+}
+.rdp-root .rdp-day_button{
+  margin: 0 auto;
+}
+
+/* 선택된 날짜 */
+.rdp-weeks .rdp-selected, .rdp-weeks .rdp-day_selected {
+  position: relative;
+  background: transparent;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.today-marker{
+  position: relative;
+  margin-bottom: 10px;
+}
+.today-marker button.rdp-day_button {
+  display: flex;
+    width: 38px;
+    height: 38px;
+    justify-items: center;
+    align-items: center;
+  color: var(--color-t1);
+  border: 1px solid var(--color-t5);
+  border-radius: 50%;
+}
+.rdp-range_middle .rdp-day_button{
+  background: #edfff5;
+}
+.rdp-weeks .rdp-range_end .rdp-day_button, .rdp-weeks .rdp-range_start .rdp-day_button{
+  background-color: var(--color-main1);
+  border: 0;
+}
+/* 선택됐을때 바탕색 */
+.rdp-weeks .rdp-range_start .rdp-day_button::after,
+.rdp-weeks .rdp-range_end .rdp-day_button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+  height: 100%;
+  background: #edfff5;
+  z-index: -1;
+}
+
+/* 오른쪽 배경 */
+.rdp-weeks .rdp-range_start .rdp-day_button::after {
+  right: 0;
+}
+
+/* 왼쪽 배경 */
+.rdp-weeks .rdp-range_end .rdp-day_button::before {
+  left: 0;
+}
+
+/* start+end가 같은 날인 경우에는 before/after를 모두 제거 */
+.rdp-weeks .rdp-range_start.rdp-range_end .rdp-day_button::before,
+.rdp-weeks .rdp-range_start.rdp-range_end .rdp-day_button::after {
+  content: none;
+}
+
+.rdp-weeks .rdp-range_middle {
+  color: var(--color-t1);
+  background: #edfff5;
+}
+.today-marker::after {
+  content: '오늘';
+  display: block;
+    text-align: center;
+    margin-top: 2px;
+  font:var(--font-10b);
+  color: var(--color-t2)
+}
+.disabled-day {
+  color: #ddd;
+  pointer-events: none;
+}
