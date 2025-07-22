@@ -1,30 +1,26 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams, useParams } from 'next/navigation'
 
-interface CallbackPageProps {
-  params: { provider: string }
-}
-
-export default function CallbackPage({ params }: CallbackPageProps) {
+export default function CallbackPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const params = useParams() // provider 추출
 
   useEffect(() => {
     const accessToken = searchParams.get('accessToken')
     const refreshToken = searchParams.get('refreshToken')
+    // provider는 필요시 params.provider로 사용 가능
+
     if (accessToken && refreshToken) {
-      // 토큰 저장 (로컬스토리지)
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
-      // TODO: provider별로 추가 처리 필요시 분기 가능
       router.replace('/main')
     } else {
-      // 토큰이 없으면 에러 처리 또는 로그인 페이지로 이동
       router.replace('/login')
     }
-  }, [router, searchParams, params.provider])
+  }, [router, searchParams, params])
 
   return (
     <div className='flex h-screen w-full items-center justify-center'>
