@@ -1,6 +1,22 @@
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 
-const API_URL = `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}`
+// 환경별 API URL 설정
+const getApiUrl = () => {
+  // 환경변수에서 직접 설정된 URL이 있으면 사용
+  if (process.env.NEXT_PUBLIC_BASE_SERVER_URL) {
+    return process.env.NEXT_PUBLIC_BASE_SERVER_URL
+  }
+
+  // 프로덕션 환경에서는 HTTPS 사용
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://dev-wetrip.shop'
+  }
+
+  // 개발 환경에서는 HTTP 사용
+  return 'http://dev-wetrip.shop'
+}
+
+const API_URL = getApiUrl()
 const temporaryToken =
   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNDEzMDY5LCJleHAiOjE3NTM0MTQ4Njl9.3gbgsMVK0_Jfz1EAQJnXbhtSNti61xKqzhxMRHEnmBI'
 

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 
 const KaKaoLoginButton = () => {
   const router = useRouter()
+  console.log(process.env.NEXT_PUBLIC_BASE_SERVER_URL)
   return (
     <Button
       size='lg'
