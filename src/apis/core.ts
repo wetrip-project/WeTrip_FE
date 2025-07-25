@@ -3,7 +3,8 @@ import axios, { AxiosError } from 'axios'
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}`
 const temporaryToken =
   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNDEzMDY5LCJleHAiOjE3NTM0MTQ4Njl9.3gbgsMVK0_Jfz1EAQJnXbhtSNti61xKqzhxMRHEnmBI'
-export const axiosInstance = axios.create({
+
+const axiosInstance = axios.create({
   baseURL: API_URL,
   timeout: 2000,
   // withCredentials: true,
@@ -53,3 +54,5 @@ axiosInstance.interceptors.request.use((config) => {
 //     Promise.reject(error)
 //   },
 // )
+
+export default axiosInstance

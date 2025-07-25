@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 import { cn } from '@/utils/cn'
 import BottomNav from '@/components/BottomNav/BottomNav'
+import Providers from 'src/Provider/provider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,11 +25,13 @@ export default function RootLayout({
       <body
         className={cn(
           pretendardFont.className,
-          'mx-auto min-h-[100dvh] w-[360px] border-l border-r pb-[65px]',
+          'mx-auto min-h-[100dvh] w-[360px] border-r border-l pb-[65px]',
         )}
       >
-        {children}
-        <BottomNav />
+        <Providers>
+          {children}
+          <BottomNav />
+        </Providers>
       </body>
     </html>
   )

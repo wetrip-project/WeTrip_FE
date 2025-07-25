@@ -6,12 +6,11 @@ import { useRouter, useSearchParams, useParams } from 'next/navigation'
 export default function CallbackPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const params = useParams() // provider 추출
+  const params = useParams()
 
   useEffect(() => {
     const accessToken = searchParams.get('accessToken')
     const refreshToken = searchParams.get('refreshToken')
-    // provider는 필요시 params.provider로 사용 가능
 
     if (accessToken && refreshToken) {
       localStorage.setItem('accessToken', accessToken)
