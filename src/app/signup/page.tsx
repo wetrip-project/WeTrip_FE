@@ -22,19 +22,19 @@ export default function SignupPage() {
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  const goToStep = (n: number) => {
-    const newSearch = new URLSearchParams(window.location.search)
-    newSearch.set('step', String(n))
-    const newUrl = `/signup?${newSearch.toString()}`
+  const goToNextStep = (n: number) => {
+    const params = new URLSearchParams(window.location.search)
+    params.set('step', String(n))
+    const newUrl = `/signup?${params.toString()}`
     window.history.pushState({}, '', newUrl)
     setStep(n)
   }
 
   return (
     <div className='h-[calc(100vh-62px)] w-[320px]'>
-      {step === 1 && <Step1 onNext={() => goToStep(2)} />}
-      {step === 2 && <Step2 onNext={() => goToStep(3)} />}
-      {step === 3 && <Step3 onNext={() => goToStep(4)} />}
+      {step === 1 && <Step1 onNext={() => goToNextStep(2)} />}
+      {step === 2 && <Step2 onNext={() => goToNextStep(3)} />}
+      {step === 3 && <Step3 onNext={() => goToNextStep(4)} />}
       {step === 4 && <Step4 />}
     </div>
   )
