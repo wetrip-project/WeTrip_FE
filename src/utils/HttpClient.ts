@@ -1,13 +1,24 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-export class HttpClient {
+const temporaryToken =
+  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNDEzMDY5LCJleHAiOjE3NTM0MTQ4Njl9.3gbgsMVK0_Jfz1EAQJnXbhtSNti61xKqzhxMRHEnmBI'
+
+export default class HttpClient {
   private readonly client: AxiosInstance
 
-  constructor() {
+  constructor(baseURL: string) {
     this.client = axios.create({
-      baseURL: `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}`,
+      baseURL,
       // withCredentials: true,
       timeout: 2000,
+    })
+
+    this.client.interceptors.request.use((config) => {
+      const token = temporaryToken
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+      return config
     })
   }
 
