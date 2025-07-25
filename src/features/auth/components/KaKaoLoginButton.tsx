@@ -11,7 +11,7 @@ const KaKaoLoginButton = () => {
       size='lg'
       className='font-16r bg-[#FAE100] text-black'
       onClick={() =>
-        router.push(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/oauth2/authorization/kakao`)
+        router.push(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}oauth2/authorization/kakao`)
       }
     >
       <div className='flex h-[24px] gap-1 align-middle'>
