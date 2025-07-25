@@ -14,7 +14,7 @@ export default class HttpClient {
     })
 
     this.client.interceptors.request.use((config) => {
-      const token = temporaryToken
+      const token = localStorage.getItem('accessToken')
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
