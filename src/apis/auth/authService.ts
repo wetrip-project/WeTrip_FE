@@ -1,10 +1,21 @@
-import { apiClient } from '@/utils/ApiClient'
-import { NicknameSetResponse } from './authQuery'
+import apiClient from '@/utils/HttpClient'
+import { authApiPath } from './authApiPath'
+import { NicknameSetResponse, UrlIssuanceResponse } from './authType'
 
-class AuthService {
+interface IAuthService {
+  postNickname(nickName: string): Promise<NicknameSetResponse>
+  urlIssuance({ extension }: { extension: string }): Promise<UrlIssuanceResponse>
+}
+
+class AuthService implements IAuthService {
   async postNickname(nickName: string) {
-    return await apiClient.post<NicknameSetResponse>('/api/auth/signup/nickname', {
+    return await apiClient.post<NicknameSetResponse>(authApiPath.nickname, {
       name: nickName,
+    })
+  }
+  async urlIssuance({ extension }: { extension: string }) {
+    return await apiClient.post<UrlIssuanceResponse>(authApiPath.urlIssuance, {
+      extension,
     })
   }
 }
