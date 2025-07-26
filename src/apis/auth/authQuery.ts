@@ -1,16 +1,23 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
-import { querykeys } from '../querykeys'
-import { authService } from './authService'
-
-export interface NicknameSetResponse {
-  nickname: string
-  message: string
-}
+import { NicknameSetResponse, UrlIssuanceResponse } from './authType'
+import AuthQueryMap from './queryMap'
 
 export const useSetNickname = (nickname: string): UseQueryResult<NicknameSetResponse, Error> => {
   return useQuery<NicknameSetResponse, Error>({
-    queryKey: [querykeys.userOnboarding.nickname, nickname],
-    queryFn: () => authService.postNickname(nickname),
+    queryKey: AuthQueryMap.nickname.key(nickname),
+    queryFn: () => AuthQueryMap.nickname.fn(nickname),
     enabled: !!nickname,
+  })
+}
+
+export const useUrlIssuance = ({
+  extension,
+}: {
+  extension: string
+}): UseQueryResult<UrlIssuanceResponse, Error> => {
+  return useQuery<UrlIssuanceResponse, Error>({
+    queryKey: AuthQueryMap.urlIssuance.key(extension),
+    queryFn: () => AuthQueryMap.urlIssuance.fn(extension),
+    enabled: !!extension,
   })
 }
