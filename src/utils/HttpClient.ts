@@ -11,9 +11,9 @@ class HttpClient {
       timeout: 2000,
     })
     this.client.interceptors.request.use((config) => {
-      // const token = localStorage.getItem('accessToken')
-      const token =
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNTEzOTkzLCJleHAiOjE3NTM1MjExOTN9.GCa_6rJa7Z8zX_zyLbQST_aGSdOxAAmMhI6Svs7VQNM'
+      const token = localStorage.getItem('accessToken')
+      // const token =
+      //   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNTEzOTkzLCJleHAiOjE3NTM1MjExOTN9.GCa_6rJa7Z8zX_zyLbQST_aGSdOxAAmMhI6Svs7VQNM'
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
