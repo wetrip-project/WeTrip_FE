@@ -30,7 +30,7 @@ const Step4 = () => {
               id='avator'
               accept='image/png, image/jpeg'
               multiple={false}
-              onChange={handleChange}
+              onClick={uploadImage}
               className='absolute top-0 left-0 h-[50px] w-[320px] opacity-0'
             />
           }
@@ -43,6 +43,7 @@ const Step4 = () => {
           variant={'deactivation'}
           size={'lg'}
           className='font-16r rounded-md'
+          // onClick={uploadImage}
         />
       </div>
     </div>

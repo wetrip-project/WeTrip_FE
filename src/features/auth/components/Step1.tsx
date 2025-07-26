@@ -13,12 +13,10 @@ type Props = {
 const Step1 = ({ onNext }: Props) => {
   const [nickname, setNickname] = useState('')
   const debouncedNickname = useDebounce(nickname, 500)
-  // useEffect(() => {
-  //   console.log('debouncedNickname: ', debouncedNickname)
-  // }, [debouncedNickname])
   const { data, status } = useSetNickname(debouncedNickname)
   useEffect(() => {
     if (status === 'success') {
+      console.log(data.message)
       console.log('닉네임 임시 저장 성공, ', data?.nickname)
     }
   }, [status, data])
