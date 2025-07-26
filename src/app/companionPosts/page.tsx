@@ -1,21 +1,22 @@
-'use client'; 
+'use client'
 
-import React, { useState } from 'react';
-import CompanionPostList from '../../features/companionPosts/components/CompanionPostList';
-import FilterTagBar from '../../features/companionPosts/components/FilterTagBar';
-import { Search } from '@/components/Search';
-import Icon from '@/components/Icon/icon';
-import EmptyResult from '@/components/common/EmptyResult';
+import React, { useState } from 'react'
+import CompanionPostList from '../../features/companionPosts/components/CompanionPostList'
+import FilterTagBar from '../../features/companionPosts/components/FilterTagBar'
+import { Search } from '@/components/Search'
+import Icon from '@/components/Icon/icon'
+import EmptyResult from '@/components/common/EmptyResult'
+import Link from 'next/link'
 
 type Post = {
-  id: number;
-  status: "모집중" | "모집완료";
-  period: string;
-  title: string;
-  description: string;
-  tags: string[];
-  imageUrl: string;
-};
+  id: number
+  status: '모집중' | '모집완료'
+  period: string
+  title: string
+  description: string
+  tags: string[]
+  imageUrl: string
+}
 
 //임시 더미데이터입니다.
 const dummyPosts: Post[] = [
@@ -24,7 +25,8 @@ const dummyPosts: Post[] = [
     status: '모집중',
     period: '25.06.01~25.06.05',
     title: '서울 야경 투어 함께 가실 분!',
-    description: '서울의 멋진 야경을 같이 보러 가요. 초보 환영!서울의 멋진 야경을 같이 보러 가요. 초보 환영!서울의 멋진 야경을 같이 보러 가요. 초보 환영!서울의 멋진 야경을 같이 보러 가요. 초보 환영!',
+    description:
+      '서울의 멋진 야경을 같이 보러 가요. 초보 환영!서울의 멋진 야경을 같이 보러 가요. 초보 환영!서울의 멋진 야경을 같이 보러 가요. 초보 환영!서울의 멋진 야경을 같이 보러 가요. 초보 환영!',
     tags: ['#20대', '#30대', '#여성'],
     imageUrl: '/assets/icons/logoWithHappy.png',
   },
@@ -44,7 +46,7 @@ const dummyPosts: Post[] = [
     title: '강릉 커피거리 투어 멤버 모집',
     description: '커피 좋아하는 분들과 강릉 여행 가요 ☕️',
     tags: ['#40대', '#혼성'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 4,
@@ -53,7 +55,7 @@ const dummyPosts: Post[] = [
     title: '제주도 올레길 걷기 동행 구해요',
     description: '자연을 좋아하는 분, 걷는 거 좋아하는 분 환영!',
     tags: ['#남성', '#40대', '#50대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 5,
@@ -62,7 +64,7 @@ const dummyPosts: Post[] = [
     title: '전주 한옥마을 맛집 투어',
     description: '전주 한옥마을에서 한옥과 맛집을 즐겨요!',
     tags: ['#여성', '#50대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 6,
@@ -71,7 +73,7 @@ const dummyPosts: Post[] = [
     title: '속초 해수욕장 당일치기 모집',
     description: '속초 해수욕장 가볍게 놀러가요~',
     tags: ['#혼성', '#30대'],
-    imageUrl: '/assets/icons/logoWithHappy.png' 
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 7,
@@ -80,7 +82,7 @@ const dummyPosts: Post[] = [
     title: '광주 미술관 투어',
     description: '미술 좋아하시는 분들과 함께 관람해요.',
     tags: ['#여성', '#40대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 8,
@@ -89,7 +91,7 @@ const dummyPosts: Post[] = [
     title: '경주 역사 유적지 투어',
     description: '역사 좋아하는 분들 환영!',
     tags: ['#남성', '#50대'],
-    imageUrl: '/assets/icons/logoWithHappy.png' 
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 9,
@@ -98,7 +100,7 @@ const dummyPosts: Post[] = [
     title: '서울 근교 캠핑 모임',
     description: '가벼운 캠핑 모임 함께해요~',
     tags: ['#혼성', '#20대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 10,
@@ -107,7 +109,7 @@ const dummyPosts: Post[] = [
     title: '포항 해산물 투어',
     description: '포항으로 해산물 투어 떠나요!',
     tags: ['#여성', '#60대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 11,
@@ -116,7 +118,7 @@ const dummyPosts: Post[] = [
     title: '대구 야시장 나들이',
     description: '대구 야시장 구경하며 먹거리 투어!',
     tags: ['#혼성', '#30대'],
-    imageUrl: '/assets/icons/logoWithHappy.png' 
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 12,
@@ -125,7 +127,7 @@ const dummyPosts: Post[] = [
     title: '울산 고래문화마을 탐방',
     description: '울산 고래문화마을 구경 같이가요~',
     tags: ['#남성', '#50대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 13,
@@ -134,7 +136,7 @@ const dummyPosts: Post[] = [
     title: '청주 고인돌 공원 산책',
     description: '조용히 산책 즐기실 분!',
     tags: ['#여성', '#60대'],
-    imageUrl: '/assets/icons/logoWithHappy.png' 
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 14,
@@ -143,7 +145,7 @@ const dummyPosts: Post[] = [
     title: '수원 화성 투어',
     description: '수원 화성 관광 함께 가실 분',
     tags: ['#혼성', '#40대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 15,
@@ -152,7 +154,7 @@ const dummyPosts: Post[] = [
     title: '춘천 닭갈비 먹방 투어',
     description: '춘천으로 먹방여행 떠나요!',
     tags: ['#여성', '#30대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 16,
@@ -161,7 +163,7 @@ const dummyPosts: Post[] = [
     title: '부여 백제문화 탐방',
     description: '백제문화 유적지 투어',
     tags: ['#혼성', '#50대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 17,
@@ -170,7 +172,7 @@ const dummyPosts: Post[] = [
     title: '강원도 가을 단풍 투어',
     description: '가을 단풍 명소 투어 함께해요',
     tags: ['#남성', '#40대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 18,
@@ -179,7 +181,7 @@ const dummyPosts: Post[] = [
     title: '부산 불꽃축제 관람',
     description: '부산 불꽃축제 함께 보러가요!',
     tags: ['#혼성', '#20대'],
-    imageUrl: '/assets/icons/logoWithHappy.png' 
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 19,
@@ -188,7 +190,7 @@ const dummyPosts: Post[] = [
     title: '인천 차이나타운 투어',
     description: '차이나타운 먹거리 투어!',
     tags: ['#여성', '#40대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
   {
     id: 20,
@@ -197,83 +199,76 @@ const dummyPosts: Post[] = [
     title: '강릉 해돋이 투어',
     description: '새해 해돋이 보러가요 🌅',
     tags: ['#남성', '#20대'],
-    imageUrl: '/assets/icons/logoWithHappy.png'
+    imageUrl: '/assets/icons/logoWithHappy.png',
   },
-];
-
+]
 
 const CompanionPostsPage = () => {
   // 모집중 필터 상태
-  const [showRecruitingOnly, setShowRecruitingOnly] = useState<boolean>(false);
+  const [showRecruitingOnly, setShowRecruitingOnly] = useState<boolean>(false)
   // 선호 태그 상태
-  const [selectedAgeTags, setSelectedAgeTags] = useState<string[]>([]);
-  const [selectedGenderTags, setSelectedGenderTags] = useState<string[]>([]);
+  const [selectedAgeTags, setSelectedAgeTags] = useState<string[]>([])
+  const [selectedGenderTags, setSelectedGenderTags] = useState<string[]>([])
   // 여행일자 상태
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-  const [endDate, setEndDate] = useState<Date | undefined>(undefined);
+  const [startDate, setStartDate] = useState<Date | undefined>(undefined)
+  const [endDate, setEndDate] = useState<Date | undefined>(undefined)
 
-  
-  const filteredPosts = dummyPosts.filter(post => {
+  const filteredPosts = dummyPosts.filter((post) => {
     // 모집중 필터
-    const statusMatch = showRecruitingOnly ? post.status === '모집중' : true;
-  
+    const statusMatch = showRecruitingOnly ? post.status === '모집중' : true
+
     // 연령대 태그 필터
-    const ageMatch = selectedAgeTags.length === 0
-      ? true
-      : selectedAgeTags.some(tag => post.tags.includes(`#${tag}`));
-  
+    const ageMatch =
+      selectedAgeTags.length === 0
+        ? true
+        : selectedAgeTags.some((tag) => post.tags.includes(`#${tag}`))
+
     // 성별 태그 필터
-    const genderMatch = selectedGenderTags.length === 0
-      ? true
-      : selectedGenderTags.some(tag => post.tags.includes(`#${tag}`));
-  
+    const genderMatch =
+      selectedGenderTags.length === 0
+        ? true
+        : selectedGenderTags.some((tag) => post.tags.includes(`#${tag}`))
+
     // 여행일자 필터
-    const periodParts = post.period.split('~');
-    const postStartDate = new Date(`20${periodParts[0].replace(/\./g, '-')}`);
-    const postEndDate = new Date(`20${periodParts[1].replace(/\./g, '-')}`);
+    const periodParts = post.period.split('~')
+    const postStartDate = new Date(`20${periodParts[0].replace(/\./g, '-')}`)
+    const postEndDate = new Date(`20${periodParts[1].replace(/\./g, '-')}`)
 
     const dateMatch =
-    !startDate || !endDate
-      ? true
-      : postEndDate >= startDate && postStartDate <= endDate;
+      !startDate || !endDate ? true : postEndDate >= startDate && postStartDate <= endDate
 
     // 최종 반환
-    return statusMatch && ageMatch && genderMatch && dateMatch;
-  });
-  
+    return statusMatch && ageMatch && genderMatch && dateMatch
+  })
 
   return (
     <>
-    <div className='py-5'>
-      <Search placeholder={'나라, 도시, 일정 검색'} className='mx-5 bg-[#f8f9f8] border-0'/>
-      <FilterTagBar
-        showRecruitingOnly={showRecruitingOnly}
-        setShowRecruitingOnly={setShowRecruitingOnly}
-        selectedAgeTags={selectedAgeTags}
-        setSelectedAgeTags={setSelectedAgeTags}
-        selectedGenderTags={selectedGenderTags}
-        setSelectedGenderTags={setSelectedGenderTags}
-        startDate={startDate}
-        setStartDate={setStartDate}
-        endDate={endDate}
-        setEndDate={setEndDate}
-      />
-      {filteredPosts.length === 0 ? (
-        <EmptyResult />
-      ) : (
-        <CompanionPostList posts={filteredPosts} />
-      )}
-    </div>
-    <div className="fixed bottom-[93px] right-6 z-10">
-      <button className="flex justify-center items-center gap-1 bg-main1 text-white font-16b w-[90px] h-[44px] rounded-full shadow-lg">
-           <Icon iconName={'PlusWriting'} className="w-4 h-4" />
-      글쓰기
-      </button>
-    </div>    
-  </>
-  );
-};
+      <div className='py-5'>
+        <Search placeholder={'나라, 도시, 일정 검색'} className='mx-5 border-0 bg-[#f8f9f8]' />
+        <FilterTagBar
+          showRecruitingOnly={showRecruitingOnly}
+          setShowRecruitingOnly={setShowRecruitingOnly}
+          selectedAgeTags={selectedAgeTags}
+          setSelectedAgeTags={setSelectedAgeTags}
+          selectedGenderTags={selectedGenderTags}
+          setSelectedGenderTags={setSelectedGenderTags}
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
+        {filteredPosts.length === 0 ? <EmptyResult /> : <CompanionPostList posts={filteredPosts} />}
+      </div>
+      <div className='fixed right-6 bottom-[93px] z-10'>
+        <Link href='/companionPosts/write'>
+          <button className='bg-main1 font-16b flex h-[44px] w-[90px] cursor-pointer items-center justify-center gap-1 rounded-full text-white shadow-lg'>
+            <Icon iconName={'PlusWriting'} className='h-4 w-4' />
+            글쓰기
+          </button>
+        </Link>
+      </div>
+    </>
+  )
+}
 
-
-
-export default CompanionPostsPage;
+export default CompanionPostsPage
