@@ -1,8 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-const temporaryToken =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNDEzMDY5LCJleHAiOjE3NTM0MTQ4Njl9.3gbgsMVK0_Jfz1EAQJnXbhtSNti61xKqzhxMRHEnmBI'
-
 export default class HttpClient {
   private readonly client: AxiosInstance
 
@@ -14,7 +11,9 @@ export default class HttpClient {
     })
 
     this.client.interceptors.request.use((config) => {
-      const token = localStorage.getItem('accessToken')
+      // const token = localStorage.getItem('accessToken')
+      const token =
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzUzNDQ2NjQ1LCJleHAiOjE3NTM0NDg0NDV9._f7gElBS6QvrqGTotu_xgaxtaNMAr_0KEeMiMmM9lGg'
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
