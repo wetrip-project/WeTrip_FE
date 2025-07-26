@@ -2,7 +2,7 @@ import apiClient from '@/utils/HttpClient'
 import { authApiPath } from './authApiPath'
 import { NicknameSetResponse, UrlIssuanceResponse } from './authType'
 
-interface IAuthService {
+export interface IAuthService {
   postNickname(nickName: string): Promise<NicknameSetResponse>
   urlIssuance({ extension }: { extension: string }): Promise<UrlIssuanceResponse>
 }

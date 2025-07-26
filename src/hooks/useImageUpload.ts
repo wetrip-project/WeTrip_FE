@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { StaticImageData } from 'next/image'
+import { authService } from '@/apis/auth/authService'
 
 type PreviewType = string | StaticImageData
 
@@ -36,16 +37,19 @@ export function useImageUpload() {
   }
 
   const uploadImage = async () => {
-    if (!file) return null
-    // const formData = new FormData()
-    // formData.append('image', file)
-    // const res = await fetch('/api/upload', {
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    // const result = await res.json()
-    // return result.filePath
-    console.log('uploadImage')
+    console.log('업로드 버튼 클릭됨')
+    if (!file) return alert('이미지를 먼저 선택해주세요.')
+    console.log('file: ', file)
+    try {
+      const extension = file.name.split('.').pop() ?? 'jpeg'
+      const { uploadUrl, fileName } = await authService.urlIssuance({ extension })
+      console.log('uploadUrl: ', uploadUrl)
+      return uploadUrl
+    } catch (err) {
+      console.error('업로드 중 오류 발생:', err)
+      alert('이미지 업로드에 실패했습니다.')
+      return null
+    }
   }
 
   return { preview, handleChange, uploadImage }
