@@ -1,4 +1,4 @@
-export const AUTH_SIGNUP_PREFIX = '/api/auth/signup' as const
+export const AUTH_SIGNUP_PREFIX = '/auth/signup' as const
 
 export const authApiPath = {
   profile: AUTH_SIGNUP_PREFIX,
