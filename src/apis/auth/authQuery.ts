@@ -6,7 +6,7 @@ export const useSetNickname = (nickname: string): UseQueryResult<NicknameSetResp
   return useQuery<NicknameSetResponse, Error>({
     queryKey: AuthQueryMap.nickname.key(nickname),
     queryFn: () => AuthQueryMap.nickname.fn(nickname),
-    enabled: !!nickname,
+    enabled: false,
   })
 }
 
