@@ -64,8 +64,8 @@ const Step1 = ({ onNext }: Props) => {
               </span>
             )}
             {status === 'success' && (
-              <span className='font-12r text-error h-[14px] w-[320px]'>
-                {data.nickname}은 사용 가능한 닉네임입니다.
+              <span className='font-12r h-[14px] w-[320px] text-black'>
+                {data.nickname}로 등록되었습니다.
               </span>
             )}
           </div>
@@ -78,6 +78,7 @@ const Step1 = ({ onNext }: Props) => {
               ? 'bg-main1 font-16r inline-flex w-[320px] items-center justify-center rounded-md py-[14px] text-white'
               : 'bg-disabled text-t3 font-16r inline-flex h-[50px] w-[320px] items-center justify-center rounded-md py-[14px]',
           )}
+          disabled={status !== 'success'}
           whileTap={{ scale: 0.95 }}
           onClick={onNext}
         >
