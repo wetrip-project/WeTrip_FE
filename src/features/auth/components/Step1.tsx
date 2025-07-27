@@ -63,12 +63,21 @@ const Step1 = ({ onNext }: Props) => {
                 {errors.nickname.message}
               </span>
             )}
+            {status === 'success' && (
+              <span className='font-12r text-error h-[14px] w-[320px]'>
+                {data.nickname}은 사용 가능한 닉네임입니다.
+              </span>
+            )}
           </div>
         </form>
       </div>
       <div className='h-[90px] w-[320px] py-[14px]'>
         <motion.button
-          className='bg-main1 font-16r inline-flex w-[320px] items-center justify-center rounded-md py-[14px] text-white'
+          className={cn(
+            status === 'success'
+              ? 'bg-main1 font-16r inline-flex w-[320px] items-center justify-center rounded-md py-[14px] text-white'
+              : 'bg-disabled text-t3 font-16r inline-flex h-[50px] w-[320px] items-center justify-center rounded-md py-[14px]',
+          )}
           whileTap={{ scale: 0.95 }}
           onClick={onNext}
         >
