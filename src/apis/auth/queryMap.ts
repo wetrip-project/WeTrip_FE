@@ -10,6 +10,12 @@ const AuthQueryMap = {
     key: (ext: string) => [querykeys.userOnboarding.profilePhoto, ext],
     fn: (ext: string) => authService.urlIssuance({ extension: ext }),
   },
+  genderAge: {
+    key: ({ age, gender }: { age: number; gender: string }) =>
+      querykeys.userOnboarding.genderAge({ age, gender }),
+    fn: ({ age, gender }: { age: number; gender: string }) =>
+      authService.postGenderAge({ age, gender }),
+  },
 } as const
 
 export default AuthQueryMap
