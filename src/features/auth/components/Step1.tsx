@@ -2,35 +2,69 @@
 
 import { useSetNickname } from '@/apis/auth/authQuery'
 import { Input } from '@/components/Input'
+import { nicknameSchema } from '@/constants/schema/nicknameSchema'
 import useDebounce from '@/hooks/useDebounce'
+import { cn } from '@/utils/cn'
+
+import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
 
 type Props = {
   onNext: () => void
 }
 
+type NicknameData = {
+  nickname: string
+}
+
 const Step1 = ({ onNext }: Props) => {
-  const [nickname, setNickname] = useState('')
-  const debouncedNickname = useDebounce(nickname, 500)
-  const { data, status } = useSetNickname(debouncedNickname)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<NicknameData>({
+    resolver: zodResolver(nicknameSchema),
+    mode: 'onChange',
+  })
+
+  const watchedNickname = watch('nickname')
+  const debouncedNickname = useDebounce(watchedNickname, 500)
+  const { data, status, refetch } = useSetNickname(debouncedNickname)
+
+  const onSubmit: SubmitHandler<NicknameData> = (data) => {
+    console.log('최종 제출:', data)
+  }
+
   useEffect(() => {
-    if (status === 'success') {
-      console.log(data.message)
-      console.log('닉네임 임시 저장 성공, ', data?.nickname)
+    const isNicknameValid =
+      !errors.nickname && typeof debouncedNickname === 'string' && debouncedNickname.length > 0
+    if (isNicknameValid) {
+      refetch()
     }
-  }, [status, data])
+  }, [debouncedNickname, errors.nickname])
 
   return (
     <div className='flex h-[calc(100vh-62px)] w-[320px] flex-col justify-between'>
       <div className='flex flex-1 flex-col gap-4'>
-        <div className='font-20b'>사용할 닉네임을 적어주세요</div>
-        <Input
-          variant='default'
-          placeholder='한글,숫자 최대 10자'
-          className='focus:outline-main1'
-          onChange={(e) => setNickname(e.target.value)}
-        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label className='font-20b'>사용할 닉네임을 적어주세요</label>
+          <div className='flex h-[73px] w-[320px] flex-col gap-2'>
+            <Input
+              variant={'default'}
+              placeholder='한글,숫자 최대 10자'
+              className={cn(errors.nickname ? 'outline-error' : 'focus:outline-main1')}
+              {...register('nickname')}
+            />
+            {errors.nickname && (
+              <span className='font-12r text-error h-[14px] w-[320px]'>
+                {errors.nickname.message}
+              </span>
+            )}
+          </div>
+        </form>
       </div>
       <div className='h-[90px] w-[320px] py-[14px]'>
         <motion.button
