@@ -16,8 +16,8 @@ class AuthService implements IAuthService {
   }
   async postGenderAge({ age, gender }: { age: number; gender: string }) {
     return await apiClient.post<GenderAgeResponse>(authApiPath.genderAge, {
-      age,
       gender,
+      age,
     })
   }
   async urlIssuance({ extension }: { extension: string }) {

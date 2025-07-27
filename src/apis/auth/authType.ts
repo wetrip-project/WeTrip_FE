@@ -9,7 +9,7 @@ export interface UrlIssuanceResponse {
 }
 
 export interface GenderAgeResponse {
-  age: 30
+  age: number
   gender: string
   message: string
 }
