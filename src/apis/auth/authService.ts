@@ -25,10 +25,10 @@ class AuthService implements IAuthService {
       extension,
     })
   }
-  async PutProfile(uploadUrl: string, file: File) {
-    return await axios.put(uploadUrl, file, {
+  async PutProfile(uploadUrl: string, blob: Blob) {
+    return await axios.put(uploadUrl, blob, {
       headers: {
-        'Content-Type': file.type,
+        'Content-Type': blob.type,
       },
     })
   }
